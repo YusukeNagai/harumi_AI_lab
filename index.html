@@ -80,9 +80,7 @@ section h2{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:900}
 
 .points{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
 .point{min-width:0}
-.steps{list-style:none;padding:0;margin-inline:0;margin-bottom:0}
 .point{border-top:2px solid var(--ink);padding-top:12px}
-.step-no{font-family:var(--mono);font-size:.8rem;color:var(--sea);letter-spacing:.08em;margin-bottom:2px}
 .point h3{font-size:1.1rem;font-weight:700}
 .point p{margin-top:6px;color:var(--muted);font-size:.95rem}
 
@@ -180,23 +178,20 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
     <section id="about">
       <h2>はるみAIラボってどんなところ？</h2>
       <p class="sec-lead">AIを「答えを出してくれる機械」ではなく、アイデアを広げてくれる相棒として使います。主役は、こどもの「やってみたい」です。</p>
-      <ol class="points steps">
-        <li class="point">
-          <p class="step-no">01</p>
-          <h3>考える</h3>
-          <p>何をつくりたいかを、まず自分で決めます。AIの答えもうのみにせず、自分で確かめながら進めます。</p>
-        </li>
-        <li class="point">
-          <p class="step-no">02</p>
-          <h3>つくる</h3>
-          <p>AIに話しかけながら、物語や絵、ゲームなどの作品に仕上げます。説明は短めにして、手を動かす時間を長くとります。</p>
-        </li>
-        <li class="point">
-          <p class="step-no">03</p>
-          <h3>届ける</h3>
-          <p>できた作品を、参加者や保護者の方の前で発表します。発表をきっかけに、親子やご近所の人がつながる場にしたいと考えています。</p>
-        </li>
-      </ol>
+      <div class="points">
+        <div class="point">
+          <h3>つくることが中心</h3>
+          <p>説明を聞く時間は短めに。手を動かして、自分だけの作品を持ち帰ります。</p>
+        </div>
+        <div class="point">
+          <h3>使い方のルールも学ぶ</h3>
+          <p>個人情報を入れない、AIの答えをうのみにしないなど、安心して使うための約束もいっしょに覚えます。</p>
+        </div>
+        <div class="point">
+          <h3>親子・ご近所がつながる</h3>
+          <p>作品の発表を通して、親御さん同士も顔見知りに。晴海のまちの新しいつながりの場にしたいと考えています。</p>
+        </div>
+      </div>
     </section>
 
     <section id="makes">
