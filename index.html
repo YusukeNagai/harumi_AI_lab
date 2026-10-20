@@ -145,7 +145,31 @@ section h2{font-size:clamp(1.85rem,4.6vw,2.6rem);font-weight:900;line-height:1.3
 .copy{font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--sea);border-radius:2px;padding:10px 16px;background:var(--sea);color:var(--paper);cursor:pointer}
 .copy:hover{filter:brightness(1.08)}
 
-footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+/* 事前登録 */
+.next{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.next-date{font-weight:700;font-size:.95rem;border-left:4px solid var(--sun);padding:2px 0 2px 12px}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:.95rem;border:1px solid var(--sea);border-radius:2px;padding:11px 20px;background:var(--sea);color:var(--paper);text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.6;cursor:default}
+.register{padding-block:64px;border-top:1px solid var(--line)}
+.register .sec-lead{margin-top:10px;color:var(--muted);max-width:36em}
+.form{margin-top:24px;max-width:36em;display:grid;gap:22px}
+.field{display:grid;gap:8px;min-width:0;border:0;padding:0;margin:0}
+.field > label,.field legend{font-weight:700;font-size:.92rem;padding:0}
+.req,.opt{font-size:.72rem;font-weight:700;margin-left:8px;padding:1px 6px;border-radius:2px;vertical-align:1px}
+.req{background:var(--sun-soft);color:var(--ink)}
+.opt{color:var(--muted);border:1px solid var(--line)}
+.form input[type=text],.form input[type=email],.form select,.form textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:10px 12px;width:100%;max-width:100%}
+.form textarea{min-height:5.5em;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--sea);outline:none}
+.choices{display:flex;flex-wrap:wrap;gap:8px 18px}
+.choices label{display:flex;align-items:center;gap:6px;font-size:.95rem}
+.choices input{accent-color:var(--sea);width:1.05em;height:1.05em}
+.privacy{font-size:.82rem;color:var(--muted)}
+.form-msg{font-weight:700;color:var(--sea)}
+.form-msg.err{color:#b3261e}
+.float-reg{position:fixed;z-index:20;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));box-shadow:0 6px 18px rgba(20,38,58,.22)}
+footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
 
 @media (max-width:760px){
   .hero{padding-block:12px 40px}
@@ -177,6 +201,7 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
       <a href="#flow">1回の流れ</a>
       <a href="#teacher">講師</a>
       <a href="#info">開催について</a>
+      <a href="#register">事前登録</a>
       <a href="#contact">お問い合わせ</a>
     </nav>
   </header>
@@ -187,6 +212,9 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
       <h1><span class="nb">AIで、</span><span class="nb">「つくってみたい」を</span><span class="nb">かたちに。</span></h1>
       <p class="lead">ことばで伝えると、AIが一緒に考えてくれる。思いついた物語や絵、ゲームを、その日のうちに作品にする教室です。パソコンやAIにさわったことがなくても大丈夫です。</p>
       <p class="facts"><span>小学3年生〜中学生、保護者様</span><span>経験不要</span><span>親子参加OK</span></p>
+      <div class="next">
+        <p class="next-date">第1回は2027年1月ごろ開催予定</p>
+      </div>
       <figure class="hero-photo">
         <img src="img/talk-level-sharp.jpg" width="1200" height="882" alt="ステージで、介護の書類作業を楽にするサービスを発表する講師の永井悠資">
         <figcaption>講師の永井。介護の現場の書類作業をAIで楽にするサービスを発表したときの様子</figcaption>
@@ -265,9 +293,10 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
 
     <section id="info">
       <h2>開催について</h2>
-      <p class="sec-lead">開催日程や内容は、現在調整中です。決まりしだい、このページでお知らせします。</p>
+      <p class="sec-lead">第1回は2027年1月ごろの開催を予定しています。日時と内容は、<a href="#register">事前登録</a>いただいた方に先にお知らせします。</p>
       <div class="info">
         <dl>
+          <dt>時期</dt><dd>2027年1月ごろ（予定）<small>日時は決まりしだいお知らせします</small></dd>
           <dt>対象</dt><dd>小学3年生〜中学生、保護者様</dd>
           <dt>レベル</dt><dd>初心者（経験不要）</dd>
           <dt>時間</dt><dd>60分〜</dd>
@@ -275,6 +304,24 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
           <dt>場所</dt><dd>はるみらい館内など、ご相談のうえ決定</dd>
         </dl>
       </div>
+    </section>
+
+    <section class="register" id="register">
+      <h2>事前登録</h2>
+      <p class="sec-lead">メールアドレスだけで登録できます。日時と申込みの案内を、実施が決定した際にお送りいたします。登録しても、参加が決まるわけではありません。</p>
+      <form class="form" id="regForm" novalidate>
+        <div class="field">
+          <label for="f-mail">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="f-mail" name="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="field">
+          <label for="f-grade">お子さまの学年<span class="opt">任意</span></label>
+          <select id="f-grade" name="grade"><option value="">選んでください</option><option>小学3年生</option><option>小学4年生</option><option>小学5年生</option><option>小学6年生</option><option>中学1年生</option><option>中学2年生</option><option>中学3年生</option><option>その他</option></select>
+        </div>
+        <p class="privacy">いただいた情報は、はるみAIラボの開催のご案内にだけ使います。</p>
+        <div><button class="btn" type="submit" id="regBtn">登録する</button></div>
+        <p class="form-msg" id="regMsg" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
     <section class="contact" id="contact">
@@ -288,6 +335,8 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
     </section>
   </main>
 
+  <a class="btn float-reg" id="floatReg" href="#register">事前登録する</a>
+
   <footer>
     <div class="foot-logo">
       <svg class="logo-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="94" cy="28" r="14" fill="#F28C28"/><rect x="8" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="8" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="26" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="46" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="44" y="64" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="62" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="80" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="80" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="98" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/></svg>
@@ -297,6 +346,30 @@ footer{padding-block:24px 40px;font-size:.8rem;color:var(--muted);border-top:1px
 </div>
 
 <script>
+// 事前登録：送信先（Googleフォーム）の設定。未設定のあいだは送信しない
+var REG={
+  action:'',  // 例: https://docs.google.com/forms/d/e/XXXX/formResponse
+  entry:{email:'',grade:''}  // 例: 'entry.123456'
+};
+(function(){
+  var f=document.getElementById('regForm'), msg=document.getElementById('regMsg'), btn=document.getElementById('regBtn');
+  function say(t,err){msg.textContent=t;msg.className='form-msg'+(err?' err':'');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim(), grade=f.grade.value;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say('メールアドレスを入力してください。',true);return;}
+    if(!REG.action){say('（ドラフトのため、まだ送信されません）');return;}
+    var d=new URLSearchParams();
+    d.append(REG.entry.email,email);if(grade)d.append(REG.entry.grade,grade);
+    btn.disabled=true;say('送信しています…');
+    fetch(REG.action,{method:'POST',mode:'no-cors',body:d}).then(function(){
+      f.reset();say('登録しました。日時が決まりしだい、メールでご案内します。');
+    }).catch(function(){
+      say('送信できませんでした。時間をおいて試すか、下のメールアドレスにご連絡ください。',true);
+    }).finally(function(){btn.disabled=false;});
+  });
+})();
+
 // コピー
 (function(){
   var btn=document.getElementById('copyBtn'), mail=document.getElementById('mail');
