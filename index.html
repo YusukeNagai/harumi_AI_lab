@@ -316,7 +316,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
         </div>
         <div class="field">
           <label for="f-grade">お子さまの学年<span class="opt">任意</span></label>
-          <select id="f-grade" name="grade"><option value="">選んでください</option><option>小学3年生</option><option>小学4年生</option><option>小学5年生</option><option>小学6年生</option><option>中学1年生</option><option>中学2年生</option><option>中学3年生</option><option>その他</option></select>
+          <select id="f-grade" name="grade"><option value="">選んでください</option><option>小学1年生</option><option>小学2年生</option><option>小学3年生</option><option>小学4年生</option><option>小学5年生</option><option>小学6年生</option><option>中学1年生</option><option>中学2年生</option><option>中学3年生</option><option>その他</option></select>
         </div>
         <p class="privacy">いただいた情報は、はるみAIラボの開催のご案内にだけ使います。</p>
         <div><button class="btn" type="submit" id="regBtn">登録する</button></div>
@@ -348,8 +348,8 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
 <script>
 // 事前登録：送信先（Googleフォーム）の設定。未設定のあいだは送信しない
 var REG={
-  action:'',  // 例: https://docs.google.com/forms/d/e/XXXX/formResponse
-  entry:{email:'',grade:''}  // 例: 'entry.123456'
+  action:'https://docs.google.com/forms/d/e/1FAIpQLSeoLGmQXmZ7nhmpm6qvGptsT_ZLyCIXt_XNO5dv0deGoaNOZQ/formResponse',
+  entry:{email:'entry.1950214080',grade:'entry.883024398'}
 };
 (function(){
   var f=document.getElementById('regForm'), msg=document.getElementById('regMsg'), btn=document.getElementById('regBtn');
