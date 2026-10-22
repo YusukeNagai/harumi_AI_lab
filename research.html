@@ -56,6 +56,7 @@ a{color:var(--sea)}
 .st-確認待ち{background:var(--sun-soft);color:var(--ink)}
 .st-完了{background:var(--done);color:var(--paper)}
 .st-保留{background:var(--grid);color:var(--muted)}
+.memo-tag.rel{color:var(--sea);border-color:var(--sea);border-style:dashed}
 .memo-tag{font-size:.68rem;font-weight:700;color:var(--done);border:1px solid var(--done);border-radius:2px;padding:0 5px;line-height:1.5;white-space:nowrap}
 .id{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
 
@@ -152,7 +153,7 @@ a{color:var(--sea)}
     <div id="results" class="results"></div>
   </section>
 
-  <p class="note">結果ファイルの決め方：<code>notes/</code> に Markdown（.md）を置き、1行目の見出しに T-番号を入れる（例：<code># AIの規制・ルール（T-25・途中版）</code>）。1つのファイルに複数の番号を書いてもよい。結論の冒頭には「## 結論」か「## まとめ」の最初の段落を、なければ最初の「##」の下の最初の段落を表示する。ファイルに「- 状態：途中版」「- 確認日：2026-10-22」のような行があれば、あわせて表示する。リサーチの状態は台帳（TASKS.md）の状態欄、問いとのつながりは <code>notes/research-questions.md</code> から読む。線は、問い→リサーチが research-questions.md の表、リサーチ→判断が台帳のメモに書かれた「〜（T-◯◯）の材料」などの番号から引いている。</p>
+  <p class="note">結果ファイルの決め方：<code>notes/</code> に Markdown（.md）を置き、1行目の見出しに T-番号を入れる（例：<code># AIの規制・ルール（T-25・途中版）</code>）。1つのファイルに複数の番号を書いてもよい。結論の冒頭には「## 結論」か「## まとめ」の最初の段落を、なければ最初の「##」の下の最初の段落を表示する。ファイルに「- 状態：途中版」「- 確認日：2026-10-22」のような行があれば、あわせて表示する。リサーチの状態は台帳（TASKS.md）の状態欄、問いとのつながりは <code>notes/research-questions.md</code> から読む。ほかのリサーチの結果に材料が入っているときは、research-questions.md の「リサーチごとの対応」の表の右の列にファイル名を書くと、そのリサーチの箱に「材料あり」と出る。線は、問い→リサーチが research-questions.md の表、リサーチ→判断が台帳のメモに書かれた「〜（T-◯◯）の材料」などの番号から引いている。</p>
 </div>
 
 <script type="text/plain" id="snap-tasks"># はるみAIラボ タスク台帳
@@ -176,7 +177,7 @@ a{color:var(--sea)}
 
 | 時期 | 週 | ゴール | 主なタスク |
 |---|---|---|---|
-| 10月下旬（〜10/31） | W1〜W2 | 確認メールを出し、リサーチを始める | T-04（メール送信）、T-22（リサーチの問い）、T-25・T-26・T-31（リサーチ） |
+| 10月下旬（〜10/31） | W1〜W2 | 確認メールを出し、リサーチを始める | T-04（メール送信）、T-25・T-26・T-31（リサーチ） |
 | 11月上旬（11/1〜11/15） | W3〜W4 | 第1回の中身を決める | T-07（第1回の内容）、T-08（AIツール）、T-09（小1・2の参加方法）、T-01（利用登録。11/8の建築クラブの日にあわせて）、T-06（運営サポーター1回目）、残りのリサーチ（T-23・T-24・T-27〜T-30・T-32） |
 | 11月下旬（11/16〜11/30） | W5〜W6 | 場所・お金・人数・集め方を決め、会場を押さえる | T-10（場所）、T-11（参加費）、T-12（定員・機材）、T-16（人の集め方）、T-13（日程と予約）、T-05（保険を調べる）、T-17・T-18（サイトの直し） |
 | 12月上旬（12/1〜12/15） | W7〜W8 | 告知を始めて、申込みを受け付ける | T-19（告知と申込みフォーム）、T-20（チラシ）、T-33（チラシの掲示。PORTの掲示板は事務局の確認に日数がかかる）、T-21（事前登録者への案内）、はるみらいHPのお知らせ欄の更新 |
@@ -191,10 +192,10 @@ a{color:var(--sea)}
 
 後続のタスクを止めているもの、返事に時間がかかるものを優先する。
 
-1. HARUMI FLAG CLUB事務局への確認メールを出す（T-04）
-2. 第1回の内容とリサーチの問いを決める（T-07、T-22）
-3. 第1回の内容に関わるリサーチを進める（T-25、T-26、T-31）
-4. はるみらいの利用登録の段取りを決める（T-01。11/8の建築クラブと同じ日にできるか）
+1. HARUMI FLAG CLUB事務局への確認メール（T-04）。10/23朝に送信予約済み。届いたら返事を待つ
+2. 1回完結の体験会の例の残り（T-31：持ち帰りの手間と費用、講師1人で見られる人数、第1回の案）を仕上げ、第1回の内容（T-07）を考え始める
+3. 子どもへのAIの提供の形（T-26）の残り（提供の形の案）。AIツール（T-08）の材料
+4. はるみらいの利用登録と運営サポーターの参加の段取り（T-01、T-06。11/8の建築クラブと同じ日にできるか）
 
 ## A. はるみらい・HARUMI FLAGとの関係
 
@@ -213,9 +214,9 @@ a{color:var(--sea)}
 |---|---|---|---|---|
 | T-23 | リサーチ：競合・類似サービス（子ども向けAI・プログラミング教室、オンライン講座、自治体や図書館の無料講座、晴海・湾岸エリアの近くの教室） | Claude | 未着手 | 2026-10-06の先行事例調査をもとに、近隣と最新情報を足す。`notes/` に置いたら完了 |
 | T-24 | リサーチ：世の中の動向（子ども向けAI教育の市場、学校でのAI活用の状況、保護者の関心や不安） | Claude | 未着手 | `notes/` に置いたら完了 |
-| T-25 | リサーチ：AIの規制・ルール（国の法律・指針、各サービスの年齢条件、個人情報保護法の改正、文科省のガイドライン、著作権） | Claude | 作業中（10%） | 2026-10-07の「子供のAI利用規制」のチャットをもとに最新化。保護者向け資料（T-15）の材料。`notes/` に置いたら完了 |
-| T-26 | リサーチ：子どもへのAIの提供の形（AI各社の条件、子ども向けツールの実例と比較、提供の形の案） | Claude | 作業中（10%） | 使うAIツール（T-08）の材料。`notes/` に置いたら完了 |
-| T-31 | リサーチ：1回完結の体験会のプログラム例（学年ごとに60〜90分でできること、小学1年生でもできる内容） | Claude | 作業中（10%） | 第1回の内容（T-07）と進行表（T-14）の材料。`notes/` に置いたら完了 |
+| T-25 | リサーチ：AIの規制・ルール（国の法律・指針、各サービスの年齢条件、個人情報保護法の改正、文科省のガイドライン、著作権） | Claude | 作業中（60%） | 途中版：notes/ai-rules.md（コミット bf57475、592df94）。年齢条件・文科省ガイドライン・著作権・教室で守ること（案）まで。国の法律・指針の深掘りは止めた（2026-10-22、永井の判断）。残りは保護者向け資料（T-15）を作る12月でよい。保護者向け資料（T-15）の材料。`notes/` に置いたら完了 |
+| T-26 | リサーチ：子どもへのAIの提供の形（AI各社の条件、子ども向けツールの実例と比較、提供の形の案） | Claude | 作業中（40%） | 途中版：notes/ai-tools.md（コミット ad43974）。AI各社の条件と子ども向けツールの実例8件の比較まで。残りは提供の形の案。使うAIツール（T-08）の材料。`notes/` に置いたら完了 |
+| T-31 | リサーチ：1回完結の体験会のプログラム例（学年ごとに60〜90分でできること、小学1年生でもできる内容） | Claude | 作業中（50%） | 途中版：notes/trial-programs.md（コミット 763638d）。国内の例17件、学年別の整理、小1・2と保護者同伴まで。残りは持ち帰りの手間と費用、講師1人で見られる人数、第1回の案。第1回の内容（T-07）と進行表（T-14）の材料。`notes/` に置いたら完了 |
 | T-28 | リサーチ：参加費の相場（地域の体験会・ワークショップ、公共施設での講座、民間教室の体験会） | Claude | 未着手 | 参加費（T-11）の材料。`notes/` に置いたら完了 |
 | T-29 | リサーチ：会場の比較（はるみらいとHARUMI FLAG PORTの共用施設の広さ、Wi-Fi、利用料、予約のルール。公開されている範囲で） | Claude | 未着手 | 開催場所（T-10）と定員・機材（T-12）の材料。分からない点はT-04のメールで聞く。`notes/` に置いたら完了 |
 | T-30 | リサーチ：機材（子どもが使える端末、学校のタブレットを持ち込めるか、貸出の手段、通信） | Claude | 未着手 | 定員・機材（T-12）の材料。`notes/` に置いたら完了 |
@@ -269,6 +270,7 @@ a{color:var(--sea)}
 - 2026-10-22：チラシを掲示してもらうタスク（T-33）を追加し、T-20はチラシの作成だけにした。
 - 2026-10-22：T-25・T-26の範囲を書き換えた（細かい項目は notes/ 側に書き、台帳には大きなまとまりだけ載せる）。T-04は返信を送信予約済み。
 - 2026-10-22：T-22（リサーチの問い）を完了にした。
+- 2026-10-22：リサーチの途中版を反映（T-25 60%、T-26 40%、T-31 50%）。リサーチの順番を、第1回の内容に使うT-31を先にした。「今週やること」を入れ替えた。
 </script>
 <script type="text/plain" id="snap-questions"># リサーチで答えたい問い（T-22）
 
@@ -339,7 +341,7 @@ a{color:var(--sea)}
 |---|---|
 | 会場ごとのお金のルール：はるみらいの育成サポーター制度の謝礼の目安（1組3,000円）の扱い、HARUMI FLAGの共用施設で「非営利」とされる範囲 | T-29（分からない点はT-04のメールで聞く） |
 | 近所の相場：地域の体験会・ワークショップ、公共施設の講座、民間教室の体験会 | T-28 |
-| 子ども向けAI・プログラミング教室、オンライン講座の料金と、1回あたりの人数 | T-23 |
+| 子ども向けAI・プログラミング教室、オンライン講座の料金と、1回あたりの人数（T-31で集めた体験会17件に、参加費と人数の例がある） | T-23 |
 | 保護者が払ってもよいと思う額 | T-24、T-28 |
 
 使う判断：T-11（参加費）
@@ -372,18 +374,20 @@ a{color:var(--sea)}
 
 ## リサーチごとの対応
 
-| リサーチ | 答える問い |
-|---|---|
-| T-23 競合・類似サービス | 問い5（料金と人数）、問い6（近くの教室と無料講座） |
-| T-24 世の中の動向 | 問い1（期待）、問い3（不安、学校でのAI活用）、問い5（払ってもよい額）、問い6（市場） |
-| T-25 AIの規制・ルール | 問い2（年齢条件）、問い3 |
-| T-26 子どもへのAIの提供の形 | 問い1（作品の実例）、問い2 |
-| T-27 晴海の地域性 | 問い6 |
-| T-28 参加費の相場 | 問い5 |
-| T-29 会場の比較 | 問い4、問い5（お金のルール） |
-| T-30 機材 | 問い4 |
-| T-31 1回完結の体験会の例 | 問い1、問い4（講師1人で見られる人数） |
-| T-32 告知の手段 | 問い6 |
+リサーチの結果に、別のリサーチの材料が入っていることがある。それを右の列に書き、調べるときはまずそこを読む。
+
+| リサーチ | 答える問い | ほかのリサーチで集めた材料 |
+|---|---|---|
+| T-23 競合・類似サービス | 問い5（料金と人数）、問い6（近くの教室と無料講座） | `notes/trial-programs.md`（T-31。民間・公共の体験会17件の参加費と人数）、`notes/ai-tools.md`（T-26。子ども向けAIツール8件の料金） |
+| T-24 世の中の動向 | 問い1（期待）、問い3（不安、学校でのAI活用）、問い5（払ってもよい額）、問い6（市場） |  |
+| T-25 AIの規制・ルール | 問い2（年齢条件）、問い3 |  |
+| T-26 子どもへのAIの提供の形 | 問い1（作品の実例）、問い2 |  |
+| T-27 晴海の地域性 | 問い6 |  |
+| T-28 参加費の相場 | 問い5 | `notes/trial-programs.md`（T-31。体験会17件の参加費） |
+| T-29 会場の比較 | 問い4、問い5（お金のルール） |  |
+| T-30 機材 | 問い4 | `notes/trial-programs.md`（T-31。体験会で使われたツールと、Googleアカウントが要るかどうか） |
+| T-31 1回完結の体験会の例 | 問い1、問い4（講師1人で見られる人数） |  |
+| T-32 告知の手段 | 問い6 |  |
 </script>
 <script type="application/json" id="snap-notes">[{"name": "ai-rules.md", "text": "# AIの規制・ルール（T-25・途中版）\n\n- 確認日：2026-10-22（特に書いていないものはこの日に公式ページで確認）\n- 状態：**途中版**。最後の「まだ調べていないこと」を埋めたら完成にする。\n- 使いみち：使うAIツールを決める（T-08）、保護者向け資料（T-15）の材料。\n\n## 結論\n\n子どもがAIを使うことを禁止・年齢で制限する日本の法律は、今のところ見つかっていない。年齢の線は各サービスの規約で決まっている（ChatGPTは13歳以上で18歳未満は保護者の許可、Claudeの個人向けは18歳以上など）。AI各社のうち、Claude と OpenAI は自社のAIを子ども向けサービスに組み込むことを条件つきで認め、Gemini API は禁止している。国の法律・指針の部分は、一次資料を読んで書き直す予定。\n\n## 1. 国の法律・指針はあるか\n\n**今のところ、子どもがAIを使うことを禁止したり、年齢で制限したりする日本の法律は見つかっていない。** 年齢の線は、各サービスが自社の規約で決めている。\n\n| 名前 | 内容 | 子どもの利用への影響 |\n|---|---|---|\n| AI推進法（人工知能関連技術の研究開発及び活用の推進に関する法律） | 2025年9月に全面施行。AIの研究と活用を進めるための法律で、罰則はない | 年齢の規制はない |\n| 改正個人情報保護法（令和8年改正） | 2026年7月10日成立、7月17日公布。**16歳未満の本人について、同意や通知の相手を親（法定代理人）にする**ことを明記。16歳未満は親を通じて利用停止を求めやすくなる。事業者は子どもの「最善の利益」を考えるよう努める | 子どもの名前などを集める事業者に関係する。施行は公布から2年以内（政令で決まる）。子どもの部分の施行日は未確認 |\n| 文部科学省「初等中等教育段階における生成AIの利活用に関するガイドライン」Ver.2.0（2024年12月26日） | 学校向けの参考資料。守らないと罰がある決まりではない | 下の「3」にまとめた |\n\n- 「13歳」という線は、アメリカの法律（COPPA：13歳未満の子どもの個人情報を集めるときは親の同意が要る）に各社が合わせたものと考えられる。\n- 出典：\n  - 個人情報保護委員会「令和8年 改正個人情報保護法について」 https://www.ppc.go.jp/personalinfo/legal/r8kaiseihogohou/\n  - 同「公布について（令和8年7月17日）」 https://www.ppc.go.jp/news/press/2026/260717/\n  - AI推進法の罰則がないことは解説記事で確認（例：https://www.ai-souken.com/article/what-is-ai-promotion-law ）。法律の原文は未確認\n\n## 2. 各サービスの年齢条件（個人向けの利用）\n\n| サービス | 年齢条件 | 保護者の関わり | 出典 |\n|---|---|---|---|\n| ChatGPT | 13歳以上。18歳未満は親か後見人の許可が必要 | 保護者アカウントと連携して、画像生成のオフ、使えない時間帯などを設定できる。**保護者でも会話の中身は見られない**。アカウントを他人と共有するのは規約で禁止 | 利用規約（2026-01-01発効） https://openai.com/ja-JP/policies/row-terms-of-use/ ／ペアレンタルコントロール https://help.openai.com/ja-jp/articles/12315553 |\n| Claude（個人向け） | **18歳以上** | なし | https://www.anthropic.com/legal/consumer-terms （2025-10-08発効） |\n| Gemini アプリ | 13歳未満は、保護者がファミリーリンク（Googleの保護者管理アプリ）で許可すれば使える | 保護者がオン・オフを切り替えられる。管理されている子どものアカウントでは順次提供中で、**まだ使えないことがある** | https://support.google.com/gemini/answer/16109150?hl=ja |\n| Microsoft Copilot | 13歳以上。国によってはもっと上 | Microsoftの一覧では、日本は「16歳未満は保護者が管理するアカウントが必要」。日本では実質16歳からと読めるが**要確認** | https://support.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-young-people ／ https://support.microsoft.com/en-us/accounts-billing/manage/list-of-countries-or-regions-that-have-statutory-age-limits-for-children |\n| Canva | 13歳未満は、学校向けの Canva Education でのみ利用できる | Canva Education は小中高の先生と生徒向けで、無料。**民間の教室が使えるかは未確認** | https://www.canva.com/policies/terms-of-use/ （2026-08-19発効） ／ https://www.canva.com/education/ |\n| Adobe Firefly | Adobe ID は13歳以上（第三者の情報）。日本の条件は未確認 | 学校向けには、管理者が機能を切れる | https://www.esafety.gov.au/key-topics/es"}, {"name": "ai-tools.md", "text": "# 子どもへのAIの提供の形（T-26・途中版）\n\n- 確認日：2026-10-22\n- 状態：**途中版**。公式ページで分からない点が多く、各社への問い合わせが必要。\n- 答える問い：問い1（小学1年生でも使えて、講師が管理できるAIツール）、問い2（年齢条件と保護者同意）。詳しくは `notes/research-questions.md`。\n- 決めるのは永井。ここでは比べるだけにする。\n\n## 結論\n\n- 子どもが直接さわれて、講師が会話の中身を見られるツールはある（スクールAI、SchoolAI など）。\n- ただし、小学生が使ってよいか、民間の教室でも契約できるかは、どれも公式ページだけでは分からなかった。\n- 13歳未満が自由に文章で話せる既製ツールで、規約上はっきり使ってよいと書かれたものは、まだ見つかっていない。\n- 今回見た範囲では、子どもが直接使うツールは**勉強のサポート用**（分からない問題を聞く、英会話、作文の手直し）が中心。**作品づくり向けは少ない**。\n\n## 比較表\n\n| ツール | どんなもの | 年齢・保護者同意 | 講師が会話を見られるか | 民間教室で契約できるか | 料金 |\n|---|---|---|---|---|---|\n| スクールAI（みんがく） | 先生が子ども用のAIアプリをつくり、子どもが使う。日本製 | 未確認 | 見られる（会話ログを確認できる） | 塾での導入例あり | 1アカウント月990円＋契約ごとに基本料5,400円（ページの日付が分からない） |\n| スタディポケット | 学校向けの生成AI。生徒用は音声入力・手書き読み取りに対応 | 未確認 | 未確認 | 学校・自治体向け。塾・個人の記載なし | 先生用は無料。生徒用は未確認 |\n| SchoolAI（アメリカ） | 先生がつくった場で子どもがAIと話す | アメリカの子どもの個人情報の法律（COPPA）に対応と表示。年齢の記載なし | 見られる（一人ずつの会話まで） | 未確認 | 無料体験は年5回まで。有料プランの金額は非公開。日本語は未確認 |\n| MagicSchool（アメリカ） | 先生が見守る生徒用のチャットの場 | 未確認 | 見守り機能あり（不適切な言葉を検知して先生に知らせる） | 未確認 | 未確認 |\n| LOGIQ LABO（ソニー） | 年長〜小6向けの思考力アプリ。生成AIも入っている | 対象は年長〜小6 | 保護者アプリで学習状況を確認できる | 家庭向け。教室でまとめて使えるかは未確認 | 月3,480〜3,980円程度（改定の可能性あり） |\n| Code.org（AI for Oceans など） | 画面をクリックして「AIに教える」体験。文字入力はほとんど不要 | 体験はアカウントなしでできる。AIチャット機能は13歳以上 | ― | ― | 無料。画面は日本語あり（動画は英語） |\n| Teachable Machine（Google） | カメラの画像や音で「AIに覚えさせる」体験 | 未確認 | ― | ― | 未確認 |\n| Canva Education | 画像生成などのデザインツール | 13歳未満も使える | 先生がクラスを管理できる | 学校の先生向け。民間教室は対象外の可能性が高い | 無料 |\n\n## 目的で分けると\n\n| 目的 | ツール |\n|---|---|\n| 勉強のサポート | スタディポケット、スクールAI、SchoolAI、MagicSchool |\n| 考える力の練習 | LOGIQ LABO |\n| AIのしくみを知る | Code.org、Teachable Machine |\n| 作品づくり | Canva Education（学校向け） |\n\nスクールAI や SchoolAI は「先生がAIの使い方を決めて子ども用の場をつくる」作りなので、物語づくり用の場をつくれる可能性がある（未確認）。\n\n## AI各社の条件（二次ツールの前提）\n\nAI各社が、自社のAIを子ども向けサービスに組み込むことを認めているかは `notes/ai-rules.md` の「4」にまとめた。要点は次のとおり。\n\n- Anthropic（Claude）とOpenAIは条件つきで認めている。\n- Google（Gemini API）は禁止している。\n\n## 出典\n\n- スクールAI https://school-ai.mingaku.net/ 、料金 https://school-ai.mingaku.net/price/\n- スタディポケット https://studypocket.ai/\n- SchoolAI https://schoolai.com/pricing 、無料プラン https://help.schoolai.com/en/articles/15889358-understanding-the-new-schoolai-free-plan\n- MagicSchool 見守り機能 https://help.magicschool.ai/en/articles/9940070\n- LOGIQ LABO https://www.sonyged.com/logiq （料金は報道の情報： https://resemom.jp/release/prtimes/20260711/195690.html ）\n- Code.org AI設定 https://support.code.org/hc/en-us/articles/42550900593677 、AI for Oceans https://studio.code.org/s/oceans\n- Canva https://www.canva.com/policies/terms-of-use/ 、 https://www.canva.com/educati"}, {"name": "trial-programs.md", "text": "# 1回完結の体験会のプログラム例（T-31・途中版）\n\n- 状態：途中版\n- 確認日：2026-10-22\n- 答える問い：問い1（何をつくり、何を持ち帰るか）、問い3（講師1人で見られる人数）。詳しくは `notes/research-questions.md`。\n- 今回の範囲：31-1（例を集める）、31-2（学年別の整理）、31-3（小1・2の内容と保護者同伴）。31-4〜31-6（持ち帰りの手間と費用、講師1人で見られる人数、第1回の案）は次にまとめる。\n\n## 結論\n\n国内の公開例を17件集めた。作品をつくる体験会は2時間前後が多く、60分の例は講義型かオンラインが中心だった。持ち帰りは「その場で印刷」（絵本、塗り絵、写真用紙）がいちばん多く、ほかにキーホルダーやゲームのQRコードがあった。小1・2を含む会は親子で参加する形がほとんどで、中学生向けは本人のGoogleアカウントで Gemini を使う例が多かった。\n\n## 31-1 集めた例\n\n時間は、休憩を含む開催時間。「―」はページに書かれていなかったもの。\n\n| # | 主催・場所 | 対象 | 時間 | つくったもの | ツール | 持ち帰り | 人数 | 保護者 | 参加費 |\n|---|---|---|---|---|---|---|---|---|---|\n| 1 | 個人の親子ワークショップ（2024年） | 3〜8歳 | 60分 | AIで塗り絵をつくって塗る | ― | その場で印刷した塗り絵 | 4家族（約16人） | 親子で参加 | ― |\n| 2 | ニフティキッズ（メイカーフェア東京2025） | 小1〜3、小4〜6 | ― | オリジナル絵本 | ― | 絵本、家でAIキャラと話せるQRコード | 22人 | ― | 無料（入場券は有料） |\n| 3 | 香川高専（2024年11月） | 小1〜6 | ― | Canvaの画像生成で絵をつくり、光る額に飾る | Canva | 光る額（ライトフレーム） | ― | 親子で参加 | ― |\n| 4 | 福岡市博多区の教室（2026年9月） | 小1〜6 | 60分×3回 | 自分だけのキャラクター | ― | 最終回にギャラリー形式で発表 | 少人数 | 親子で体験 | 3回で10,000円 |\n| 5 | 白河市立図書館（2026年4月） | 小学生と保護者 | ― | 紙に一言キーワードを書き、AIで絵にして短い動画に | ImageFX（Google） | ― | ― | 小学生と保護者が対象 | ― |\n| 6 | 大阪・なんばの親子ワークショップ（2026年8月） | 小学校低学年〜中学生の親子 | 3時間 | 音楽、地域の魅力を使ったゲーム、発表 | Suno、Gemini | ― | 約20人 | 親子で参加 | ― |\n| 7 | 横浜市の居場所づくり（2026年8月） | 小中学生 | ― | 主人公・舞台・冒険・結末をシートに書き、AIと絵本をつくる | ― | その場で印刷・製本した絵本 | 15人 | ― | ― |\n| 8 | Relic（恵比寿・渋谷、2026年） | 小学生 | 90分〜2時間 | 画像、絵本、マンガ、ゲームから選ぶ | ― | 絵本・マンガは印刷、ゲームはQRコードを印刷 | 各回4人（講師1人に子ども2〜3人） | ― | 無料の回と3,000円の回あり |\n| 9 | とうきょうこどもクリエイティブラボ（2026年2月） | 小4〜6 | 3時間 | 動物やモノ2つを組み合わせたキャラクター | LOGIQ LABO の生成AI | アクリルのキーホルダー（画像データは持ち帰れない） | ― | 参加できず、見学のみ | 無料 |\n| 10 | Life Is Tech 親子体験会 | 小4〜6 | 2時間 | ゲームや映像 | ChatGPT、画像生成AI | ― | ― | 保護者1人が一緒に参加。小3以下は不可 | 無料 |\n| 11 | ニフティキッズ（2025年3月） | 小学生（募集は小4〜6） | 90分 | AIキャラと話して分かったことを付箋にまとめ、良い点と注意点を話し合う | AIひよりん | ― | 親子10組 | 親子で参加 | 無料 |\n| 12 | MoMo（福岡、2024年12月） | 小4〜6と保護者 | 2時間 | 夢をかなえるための計画表 | 生成AIチャット | ― | 定員20組 | 発表を見守り、家庭での支え方を話し合う | 無料 |\n| 13 | つくばの施設（2024年11月） | 小4〜6 | 2時間 | 画像、動きのデジタル化、音楽 | 画像生成など | ― | ― | 同伴が必須 | 無料 |\n| 14 | 足立区×東京電機大学（2026年9月） | 中学生 | 2時間 | Pythonのプログラム | Gemini、Python（Googleアカウントが必要） | ― | 15人（大学院生が講師） | ― | 無料 |\n| 15 | とうきょうこどもクリエイティブラボ（2025年10〜11月） | 中1〜3（13歳以上） | 2時間×2日 | 相手の好みに合わせた診断アプリ | Gemini（本人のGoogleアカウント） | つくったアプリ | 20人 | 参加できず、見学のみ | 無料 |\n| 16 | コードキャンプ×神山まるごと高専（2025年6月） | 中1〜3 | 2時間30分 | 「未来の道具」のアイデアをWebサイトにして発表 | v0、Gemini | ― | 30人 | ― | 無料 |\n| 17 | 民間の中学生向けオンライン講座（2026年8月） | 中学生 | 60分 | 調べたことをまとめる発表スライド | 無料のAI | スライド、頼み方の例文集 | 8人（講師1人） | 同席を歓迎 | 無料 |\n\n参考（作品づくりではない）：東"}]</script>
 <script>
@@ -424,13 +428,13 @@ a{color:var(--sea)}
 
   // ---- 問い（notes/research-questions.md） ----
   function parseQuestions(md){
-    var qs=[], cur=null, sec='', short={}, answers={}, inTable=false;
+    var qs=[], cur=null, sec='', short={}, answers={}, rel={};
     md.split(/\r?\n/).forEach(function(l){
       var h=l.match(/^##\s+(.*)/);
       if(h){sec=h[1].trim();var q=sec.match(/^問い(\d+)[：:]\s*(.*)/);cur=q?{n:+q[1],title:q[2],desc:[],rows:[],judges:[],jl:{}}:null;if(cur)qs.push(cur);return;}
       if(/^\|\s*-/.test(l)) return;
       if(sec.indexOf('リサーチごとの対応')===0&&/^\|/.test(l)){
-        var c=cells(l), m=c[0].match(/^T-(\d+)\s*(.*)$/); if(m){short[+m[1]]=m[2];answers[+m[1]]=c[1]||'';} return;
+        var c=cells(l), m=c[0].match(/^T-(\d+)\s*(.*)$/); if(m){short[+m[1]]=m[2];answers[+m[1]]=c[1]||'';rel[+m[1]]=[];(c[2]||'').replace(/`?notes\/([^`\s（(]+\.md)`?(?:[（(]([^）)]*)[）)])?/g,function(_,f,why){rel[+m[1]].push({name:f,why:why||''});});} return;
       }
       if(!cur) return;
       if(/^\|/.test(l)){var r=cells(l);if(r[0]!=='何を調べるか')cur.rows.push({what:r[0],raw:r[1]||'',ids:ids(r[1]||'')});return;}
@@ -438,7 +442,7 @@ a{color:var(--sea)}
       if(j){j[1].replace(/T-(\d+)(?:（([^）]*)）)?/g,function(_,n,lab){n=+n;cur.judges.push(n);if(lab)cur.jl[n]=lab;});return;}
       if(l.trim()&&!/^[-*]/.test(l)&&!/^検討のメモ/.test(l)&&!cur.rows.length) cur.desc.push(l.trim());
     });
-    return {qs:qs,short:short,answers:answers};
+    return {qs:qs,short:short,answers:answers,rel:rel};
   }
 
   // ---- 結果ファイル（notes/*.md） ----
@@ -517,7 +521,7 @@ a{color:var(--sea)}
       if(t){st=t.st;pct=t.pct;raw=t.raw;}
       else{st='完了';pct=100;raw='完了（台帳の表から「完了したもの」に移動）';}
       R[n]={id:n,short:Q.short[n]||(t?t.name.replace(/^リサーチ[：:]/,'').replace(/（.*$/,''):tid(n)),name:t?t.name.replace(/^リサーチ[：:]\s*/,''):(Q.short[n]||''),
-        who:t?t.who:'',st:st,pct:pct,raw:raw,memo:t?t.memo:'',qs:[],js:[],notes:[],answer:Q.answers[n]||''};
+        who:t?t.who:'',st:st,pct:pct,raw:raw,memo:t?t.memo:'',qs:[],js:[],notes:[],answer:Q.answers[n]||'',rel:Q.rel[n]||[]};
     });
     Q.qs.forEach(function(q){q.rs.forEach(function(n){R[n].qs.push(q.n);});});
     // リサーチ→判断：リサーチのメモにある判断の番号と、判断のメモにあるリサーチの番号
@@ -560,7 +564,7 @@ a{color:var(--sea)}
   function chip(st){return '<span class="chip st-'+esc(st)+'">'+esc(st)+'</span>';}
   function rNode(r){
     return '<button type="button" class="node r s-'+esc(r.st)+'" data-k="r'+r.id+'"><span><span class="id">'+tid(r.id)+'</span> '+esc(r.short)+'</span>'+
-      '<span class="meta">'+chip(r.st)+(r.st==='作業中'?'<span class="id">'+r.pct+'%</span>':'')+(r.notes.length?'<span class="memo-tag">メモあり</span>':'')+'</span></button>';
+      '<span class="meta">'+chip(r.st)+(r.st==='作業中'?'<span class="id">'+r.pct+'%</span>':'')+(r.notes.length?'<span class="memo-tag">メモあり</span>':r.rel.length?'<span class="memo-tag rel">材料あり</span>':'')+'</span></button>';
   }
   function render(){
     var h=['<svg id="edges" aria-hidden="true"></svg>'];
@@ -576,7 +580,7 @@ a{color:var(--sea)}
     var s=[];
     D.Q.qs.forEach(function(q){
       s.push('<div class="qcard"><h3><span class="qn">問い'+q.n+'</span>'+esc(q.title)+'</h3><div class="lbl">リサーチ</div><div class="pills">');
-      q.rs.forEach(function(n){var r=D.R[n];s.push('<button type="button" class="pill r s-'+esc(r.st)+'" data-k="r'+n+'"><span class="id">'+tid(n)+'</span>'+esc(r.short)+chip(r.st)+(r.notes.length?'<span class="memo-tag">メモ</span>':'')+'</button>');});
+      q.rs.forEach(function(n){var r=D.R[n];s.push('<button type="button" class="pill r s-'+esc(r.st)+'" data-k="r'+n+'"><span class="id">'+tid(n)+'</span>'+esc(r.short)+chip(r.st)+(r.notes.length?'<span class="memo-tag">メモ</span>':r.rel.length?'<span class="memo-tag rel">材料</span>':'')+'</button>');});
       s.push('</div><div class="lbl">使う判断</div><div class="pills">');
       q.judges.forEach(function(n){s.push('<button type="button" class="pill j" data-k="j'+n+'"><span class="id">'+tid(n)+'</span>'+esc(D.J[n].short)+'</button>');});
       s.push('</div><button type="button" class="linkish" data-k="q'+q.n+'" style="font-size:.82rem;justify-self:start">この問いの詳しい内容</button></div>');
@@ -613,6 +617,11 @@ a{color:var(--sea)}
       (f.meta['状態']?'<span class="chip st-作業中">'+esc(cut(f.meta['状態'].split(/[。（(]/)[0],12))+'</span>':'')+(f.meta['確認日']?'<span class="muted">確認日 '+esc(f.meta['確認日'].split(/[（(\s]/)[0])+'</span>':'')+'</div>'+
       (f.lead?'<div class="lead">'+inline(cut(f.lead,260))+'</div>':'<p class="muted">結論の冒頭は、まだ読み取れませんでした。</p>')+'</div>';
   }
+  function relItem(x){
+    var f=null; D.N.notes.forEach(function(nn){if(nn.name===x.name)f=nn;});
+    var url='https://github.com/'+REPO+'/blob/'+BRANCH+'/notes/'+encodeURIComponent(x.name);
+    return '<li><a href="'+url+'">notes/'+esc(x.name)+'</a>'+(f?' '+esc(f.title):'')+(x.why?'<br><span class="muted">'+esc(x.why)+'</span>':'')+'</li>';
+  }
   function refs(list,kind){
     if(!list.length) return '<span class="muted">なし</span>';
     return list.map(function(n){
@@ -634,6 +643,7 @@ a{color:var(--sea)}
         '<dt>答える問い</dt><dd>'+refs(r.qs,'q')+(/[（(]/.test(r.answer)?'<br><span class="muted">'+esc(r.answer)+'</span>':'')+'</dd><dt>使う判断</dt><dd>'+refs(r.js,'j')+'</dd></dl>');
       h.push('<h3>結果ファイル</h3>');
       h.push(r.notes.length?r.notes.map(fileBlock).join(''):'<p class="muted">まだありません。notes/ にこの番号（'+tid(n)+'）を見出しに入れたファイルを置くと、ここに出ます。</p>');
+      if(r.rel.length){h.push('<h3>ほかのリサーチで集めた材料</h3><ul>'+r.rel.map(relItem).join('')+'</ul>');}
     }
     if(t==='q'){
       var q=qOf(n);
@@ -654,7 +664,7 @@ a{color:var(--sea)}
   function renderResults(){
     var h=[], none=[];
     D.order.forEach(function(n){var r=D.R[n];
-      if(!r.notes.length){none.push(tid(n)+' '+r.short);return;}
+      if(!r.notes.length){none.push(tid(n)+' '+r.short+(r.rel.length?'（ほかのリサーチに材料あり）':''));return;}
       h.push('<div class="res"><div class="hd" style="display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline"><span class="id">'+tid(n)+'</span><h3>'+esc(r.short)+'</h3>'+chip(r.st)+'</div>'+r.notes.map(fileBlock).join('')+'</div>');
     });
     if(!h.length) h.push('<p class="muted">まだありません。</p>');
