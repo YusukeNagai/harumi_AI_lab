@@ -622,6 +622,10 @@ a{color:var(--sea)}
     var url='https://github.com/'+REPO+'/blob/'+BRANCH+'/notes/'+encodeURIComponent(x.name);
     return '<li><a href="'+url+'">notes/'+esc(x.name)+'</a>'+(f?' '+esc(f.title):'')+(x.why?'<br><span class="muted">'+esc(x.why)+'</span>':'')+'</li>';
   }
+  function viaQ(r){
+    var js=[]; r.qs.forEach(function(x){qOf(x).judges.forEach(function(j){if(js.indexOf(j)<0)js.push(j);});});
+    return js.length?refs(js,'j')+'<br><span class="muted">台帳のメモに番号がないので、答える問いの「使う判断」を出しています。</span>':refs(js,'j');
+  }
   function refs(list,kind){
     if(!list.length) return '<span class="muted">なし</span>';
     return list.map(function(n){
@@ -640,7 +644,7 @@ a{color:var(--sea)}
       h.push('<div class="hd"><span class="id">'+tid(n)+'</span><h2>'+esc(r.short)+'</h2>'+chip(r.st)+'</div>');
       h.push('<dl class="kv"><dt>調べること</dt><dd>'+esc(r.name)+'</dd><dt>台帳の状態</dt><dd>'+esc(r.raw)+(r.who?'　担当：'+esc(r.who):'')+'</dd>'+
         (r.memo?'<dt>台帳のメモ</dt><dd>'+inline(r.memo)+'</dd>':'')+
-        '<dt>答える問い</dt><dd>'+refs(r.qs,'q')+(/[（(]/.test(r.answer)?'<br><span class="muted">'+esc(r.answer)+'</span>':'')+'</dd><dt>使う判断</dt><dd>'+refs(r.js,'j')+'</dd></dl>');
+        '<dt>答える問い</dt><dd>'+refs(r.qs,'q')+(/[（(]/.test(r.answer)?'<br><span class="muted">'+esc(r.answer)+'</span>':'')+'</dd><dt>使う判断</dt><dd>'+(r.js.length?refs(r.js,'j'):viaQ(r))+'</dd></dl>');
       h.push('<h3>結果ファイル</h3>');
       h.push(r.notes.length?r.notes.map(fileBlock).join(''):'<p class="muted">まだありません。notes/ にこの番号（'+tid(n)+'）を見出しに入れたファイルを置くと、ここに出ます。</p>');
       if(r.rel.length){h.push('<h3>ほかのリサーチで集めた材料</h3><ul>'+r.rel.map(relItem).join('')+'</ul>');}
