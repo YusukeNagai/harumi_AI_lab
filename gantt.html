@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>はるみAIラボ 工程表</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: はるみAIラボのサイトと同じ港の配色。左に作業名、右に10月〜1月の週の目盛り。読み込み元は台帳（TASKS.md）。 */
+:root{
+  --bg:#f6f9fb; --paper:#ffffff; --ink:#14263a; --muted:#556a7e; --line:#d9e3ec; --grid:#ebf1f6;
+  --sea:#1f5f99; --sea-soft:#e3eef8; --sun:#f2b632; --sun-soft:#fff3d4;
+  --done:#3f8f6b; --hold:#9aa7b4; --today:#d0533a;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1a25;--paper:#162433;--ink:#e8eef4;--muted:#9fb1c3;--line:#2a3b4d;--grid:#1c2b3b;
+    --sea:#7fb6ea;--sea-soft:#1c3348;--sun:#f5c45a;--sun-soft:#3a2f14;--done:#6cc39b;--hold:#6c7a88;--today:#f08a70;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1a25;--paper:#162433;--ink:#e8eef4;--muted:#9fb1c3;--line:#2a3b4d;--grid:#1c2b3b;
+  --sea:#7fb6ea;--sea-soft:#1c3348;--sun:#f5c45a;--sun-soft:#3a2f14;--done:#6cc39b;--hold:#6c7a88;--today:#f08a70;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 48px}
+.wrap{max-width:1180px;margin-inline:auto;display:grid;gap:20px}
+h1,h2{font-family:var(--display);margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:1.6rem;font-weight:900}
+h1 .ai{color:var(--sea)}
+h2{font-size:1.05rem;font-weight:700}
+p{margin:0}
+.src{font-size:.82rem;color:var(--muted)}
+.src b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:3px}
+
+.top{display:grid;gap:6px}
+.week{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;gap:8px}
+.week ol{margin:0;padding-left:1.4em;display:grid;gap:2px}
+.week li{min-width:0}
+
+.bar-tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--paper)}
+.seg button{font:inherit;font-size:.85rem;font-weight:700;border:0;background:none;color:var(--muted);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--sea);color:var(--paper)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:18px;height:10px;border-radius:2px;display:inline-block}
+
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow-x:auto}
+.grid{min-width:880px;position:relative}
+.row{display:grid;grid-template-columns:var(--lw) 1fr;border-bottom:1px solid var(--grid)}
+.row:last-child{border-bottom:0}
+.lab{position:sticky;left:0;z-index:2;background:var(--paper);padding:7px 12px;border-right:1px solid var(--line);min-width:0;display:grid;gap:2px}
+.lab .name{font-size:.86rem;line-height:1.45}
+.lab .id{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-right:6px}
+.lab .meta{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.chip{font-size:.7rem;font-weight:700;padding:0 6px;border-radius:2px;line-height:1.6;white-space:nowrap}
+.st-未着手{border:1px solid var(--line);color:var(--muted)}
+.st-作業中{background:var(--sea-soft);color:var(--sea)}
+.st-確認待ち{background:var(--sun-soft);color:var(--ink)}
+.st-完了{background:var(--done);color:var(--paper)}
+.st-保留{background:var(--grid);color:var(--muted)}
+.who{font-size:.7rem;color:var(--muted)}
+.track{position:relative;min-height:44px}
+.bar{position:absolute;top:50%;height:16px;margin-top:-8px;border-radius:3px;min-width:6px}
+.bar.未着手{background:var(--sea-soft);border:1px solid var(--sea)}
+.bar.作業中{background:var(--sea)}
+.bar.確認待ち{background:var(--sun)}
+.bar.完了{background:var(--done)}
+.bar.保留{background:var(--hold)}
+.bar.late{outline:2px solid var(--today);outline-offset:1px}
+.nodate{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--muted)}
+
+.head .lab{font-size:.78rem;color:var(--muted);font-weight:700;justify-content:end;align-content:end}
+.head .track{min-height:58px}
+.mon{position:absolute;top:4px;font-size:.78rem;font-weight:700;padding-left:6px;border-left:1px solid var(--line);height:calc(100% - 4px)}
+.phase{position:absolute;bottom:4px;height:22px;font-size:.7rem;color:var(--muted);padding:2px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-left:2px solid var(--sea);background:var(--sea-soft)}
+.phase.ms{border-left-color:var(--today);background:var(--sun-soft);color:var(--ink);font-weight:700}
+.group .lab{font-family:var(--display);font-weight:700;font-size:.88rem;background:var(--bg)}
+.group .track{background:var(--bg);min-height:34px}
+.vline{position:absolute;top:0;bottom:0;width:1px;background:var(--grid);pointer-events:none}
+.todayline{position:absolute;top:0;bottom:0;width:2px;background:var(--today);z-index:1;pointer-events:none}
+.todaytag{position:absolute;top:0;transform:translateX(-50%);font-size:.66rem;font-weight:700;color:var(--paper);background:var(--today);padding:0 5px;border-radius:2px;z-index:3;white-space:nowrap}
+.overlay{position:absolute;top:0;bottom:0;left:var(--lw);right:0;pointer-events:none}
+
+.done{display:grid;gap:8px}
+.done ul{margin:0;padding-left:1.2em;font-size:.88rem;display:grid;gap:2px}
+.done small{color:var(--muted)}
+.note{font-size:.8rem;color:var(--muted)}
+@media (max-width:700px){
+  :root{--lw:170px}
+  h1{font-size:1.3rem}
+}
+@media (min-width:701px){:root{--lw:330px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>はるみ<span class="ai">AI</span>ラボ 工程表</h1>
+    <p class="src" id="src">台帳を読み込んでいます…</p>
+  </header>
+
+  <section class="week" id="week" hidden>
+    <h2>今週やること</h2>
+    <ol id="weekList"></ol>
+  </section>
+
+  <div class="bar-tools">
+    <div class="seg" role="group" aria-label="担当で絞り込む">
+      <button type="button" data-who="all" aria-pressed="true">すべて</button>
+      <button type="button" data-who="永井" aria-pressed="false">永井</button>
+      <button type="button" data-who="Claude" aria-pressed="false">Claude</button>
+    </div>
+    <div class="legend" aria-label="凡例">
+      <span><i class="sw" style="background:var(--sea-soft);border:1px solid var(--sea)"></i>未着手</span>
+      <span><i class="sw" style="background:var(--sea)"></i>作業中</span>
+      <span><i class="sw" style="background:var(--sun)"></i>確認待ち</span>
+      <span><i class="sw" style="background:var(--hold)"></i>保留</span>
+      <span><i class="sw" style="background:var(--paper);outline:2px solid var(--today)"></i>目安を過ぎている</span>
+    </div>
+  </div>
+
+  <div class="chart" id="chart"></div>
+  <p class="note">バーの長さは、台帳の「スケジュール（目安）」に書かれた時期です。複数の時期に出てくる作業は、最初から最後までをつなげています。時期が書かれていない作業は「時期未定」に表示します。</p>
+
+  <section class="done" id="done" hidden>
+    <h2>完了したもの</h2>
+    <ul id="doneList"></ul>
+  </section>
+</div>
+
+<script type="text/plain" id="snapshot"># はるみAIラボ タスク台帳
+
+最終更新：2026-10-22
+
+## 使い方
+
+- 状態：未着手 / 作業中 / 確認待ち / 完了 / 保留
+- 担当：永井 / Claude（チャット） / Claude Code
+- 「決める：」で始まるものは、永井が判断するタスク。
+- **完了にするのは、成果物が残ったときだけ。** 話し合っただけでは完了にしない。完了にしたら「成果物・メモ」欄に、何がどこにあるかを書き、下の「完了したもの」に移す（詳しくは CLAUDE.md の「完了の基準」）。
+- 載せるのは、第1回の開催までに必要なことだけ。開催当日や開催後の作業は、第1回の内容が決まってから足す。
+- 毎朝、定期実行のClaudeがメール・チャット・コミット履歴をもとに更新する。
+- このファイルは公開されている。メールアドレス、登録者の情報、職員の個人名、メールの本文は書かない。
+
+## スケジュール（目安）
+
+第1回を2027年1月中旬〜下旬の週末に開く前提で、逆算した目安。はるみらいの予約開始時期や、メールの返事の内容によって見直す。
+
+| 時期 | ゴール | 主なタスク |
+|---|---|---|
+| 10月下旬（〜10/31） | 確認メールを出し、リサーチを始める | T-02・T-03・T-04（メール送信）、T-22（リサーチの問い）、T-25・T-26・T-31（リサーチ） |
+| 11月上旬（11/1〜11/15） | 第1回の中身を決める | T-07（第1回の内容）、T-08（AIツール）、T-09（小1・2の参加方法）、T-01（利用登録。11/8の建築クラブの日にあわせて）、T-06（運営サポーター1回目）、残りのリサーチ（T-23・T-24・T-27〜T-30・T-32） |
+| 11月下旬（11/16〜11/30） | 場所・お金・人数・集め方を決め、会場を押さえる | T-10（場所）、T-11（参加費）、T-12（定員・機材）、T-16（人の集め方）、T-13（日程と予約）、T-05（保険を調べる）、T-17・T-18（サイトの直し） |
+| 12月上旬（12/1〜12/15） | 告知を始めて、申込みを受け付ける | T-19（告知と申込みフォーム）、T-20（チラシ。PORTの掲示板は事務局の確認に日数がかかる）、T-21（事前登録者への案内）、はるみらいHPのお知らせ欄の更新 |
+| 12月中旬〜下旬（〜12/28） | 教材と保護者向け資料をそろえる | T-14（進行表と教材）、T-15（保護者向け資料）、T-05（保険に加入） |
+| 1月上旬 | 最終準備 | 申込みの締切と参加者への最終案内、機材の準備、通しで一度試す |
+| 1月中旬〜下旬 | 第1回を開催 | |
+
+- 告知期間を1か月以上とるため、12月上旬には申込みを始めたい。そこから逆算して、場所・日程・参加費は11月中に決める。
+- 年末年始は、はるみらいや各所が休みになるので、12月28日ごろまでに準備のめどをつける。
+
+## 今週やること
+
+後続のタスクを止めているもの、返事に時間がかかるものを優先する。
+
+1. はるみらい・HARUMI FLAG CLUB事務局への確認メールを出す（T-02、T-03、T-04）
+2. 第1回の内容とリサーチの問いを決める（T-07、T-22）
+3. 第1回の内容に関わるリサーチを進める（T-25、T-26、T-31）
+4. はるみらいの利用登録の段取りを決める（T-01。11/8の建築クラブと同じ日にできるか）
+
+## A. はるみらい・HARUMI FLAGとの関係
+
+| ID | タスク | 担当 | 状態 | 成果物・メモ |
+|---|---|---|---|---|
+| T-01 | はるみらいの利用登録（館内で本人確認） | 永井 | 未着手 | はるみらいで教室を開くには必要（2026-10-20のメールで案内あり） |
+| T-02 | はるみらいHPの対象を「小学1年生〜中学生」に直してもらう依頼メール | Claude（下書き）→ 永井（送信） | 未着手 | 今の掲載は「小3〜中学生」 |
+| T-03 | はるみらいのルール確認：参加費を取ってよいか、部屋の利用料、館内にチラシを貼ってよいか | Claude（下書き）→ 永井（送信） | 未着手 | T-02と同じメールで聞いてもよい |
+| T-04 | HARUMI FLAG CLUB事務局への確認：個人でも「居住者サークル等の団体」として扱われるか、実費程度の参加費は「非営利」に入るか、共用施設の予約方法 | Claude（下書き）→ 永井（送信） | 未着手 | 2026-09-24の回答メールへの返信がまだ。回答の要点：PORT街区の掲示板は、居住者サークル等の団体が主催で公序良俗に反しなければ掲出可。共用施設は非営利のイベントなら利用可（営利は不可）。掲出前にチラシ等の提出が必要。分譲街区向けの住民ポータルはPORT住民は使えない |
+| T-05 | 教室用の保険を調べて、加入する | Claude（調査）→ 永井（加入） | 未着手 | 指導中の事故は、はるみらいが責任を負わない |
+| T-06 | 運営サポーターとして活動に参加（年度内2回以上） | 永井 | 未着手 | 候補：11/8 はるみらい建築クラブ。参加ごとに日付を書く |
+
+## B. 第1回の企画
+
+時期は2027年1月ごろ（決定済み）。
+
+| ID | タスク | 担当 | 状態 | 成果物・メモ |
+|---|---|---|---|---|
+| T-22 | 決める：リサーチで答えたい問いと、分析の切り口（例：誰に何を提供するか、ほかの教室との違い、守るべきルール） | 永井（Claudeと壁打ち） | 未着手 | リサーチ（T-23〜T-26）の前に決める。決めた内容を `notes/` に置く |
+| T-23 | リサーチ：競合・類似サービス（子ども向けAI・プログラミング教室、オンライン講座、自治体や図書館の無料講座、晴海・湾岸エリアの近くの教室） | Claude | 未着手 | 2026-10-06の先行事例調査をもとに、近隣と最新情報を足す。`notes/` に置いたら完了 |
+| T-24 | リサーチ：世の中の動向（子ども向けAI教育の市場、学校でのAI活用の状況、保護者の関心や不安） | Claude | 未着手 | `notes/` に置いたら完了 |
+| T-25 | リサーチ：AIの規制・ルール（各サービスの年齢条件、個人情報保護法の改正、文科省のガイドライン、著作権） | Claude | 未着手 | 2026-10-07の「子供のAI利用規制」のチャットをもとに最新化。保護者向け資料（T-15）の材料。`notes/` に置いたら完了 |
+| T-26 | リサーチ：子ども向けAIツール・サービス（年齢条件、料金、講師が管理できるか、小1でも使えるか） | Claude | 未着手 | 使うAIツール（T-08）の材料。`notes/` に置いたら完了 |
+| T-31 | リサーチ：1回完結の体験会のプログラム例（学年ごとに60〜90分でできること、小学1年生でもできる内容） | Claude | 未着手 | 第1回の内容（T-07）と進行表（T-14）の材料。`notes/` に置いたら完了 |
+| T-28 | リサーチ：参加費の相場（地域の体験会・ワークショップ、公共施設での講座、民間教室の体験会） | Claude | 未着手 | 参加費（T-11）の材料。`notes/` に置いたら完了 |
+| T-29 | リサーチ：会場の比較（はるみらいとHARUMI FLAG PORTの共用施設の広さ、Wi-Fi、利用料、予約のルール。公開されている範囲で） | Claude | 未着手 | 開催場所（T-10）と定員・機材（T-12）の材料。分からない点はT-03、T-04のメールで聞く。`notes/` に置いたら完了 |
+| T-30 | リサーチ：機材（子どもが使える端末、学校のタブレットを持ち込めるか、貸出の手段、通信） | Claude | 未着手 | 定員・機材（T-12）の材料。`notes/` に置いたら完了 |
+| T-07 | 決める：第1回の内容（子どもが何をつくり、何を持ち帰るか） | 永井（Claudeと壁打ち） | 未着手 | ほかの多くのタスクがこれ待ち。T-26、T-31を材料にする |
+| T-08 | 決める：使うAIツール | 永井（実際に触って決める） | 未着手 | T-26のあと |
+| T-09 | 決める：小学1・2年生の参加方法（保護者同伴か、内容を分けるか）。決まったらサイトに一文を足す | 永井 → Claude Code | 未着手 | |
+| T-10 | 決める：開催場所（はるみらい か HARUMI FLAG PORTの共用施設 か） | 永井 | 未着手 | T-29と、T-03・T-04の回答を見て決める |
+| T-11 | 決める：参加費 | 永井 | 未着手 | 育成サポーター制度での謝礼の目安は1組3,000円。HARUMI FLAGの共用施設・掲示板は営利目的不可。T-28と、T-03・T-04の回答を見て決める |
+| T-12 | 決める：定員と機材（PC・タブレットは持参か貸出か、Wi-Fi） | 永井 | 未着手 | 場所（T-10）とあわせて。T-29、T-30を材料にする |
+| T-13 | 日程を決めて、会場を予約する | 永井 | 未着手 | T-01、T-10のあと |
+| T-14 | 第1回の進行表と教材（スライド、ワークシート） | Claude Code（案）→ 永井 | 未着手 | T-07、T-08のあと。`curriculum/`、`materials/` に置く |
+| T-15 | 保護者向け資料：教室の説明、同意書、AIを使うときの約束、写真撮影と作品公開の扱い | Claude Code（案）→ 永井 | 未着手 | T-08のあと |
+
+## C. 人を集める・サイト
+
+| ID | タスク | 担当 | 状態 | 成果物・メモ |
+|---|---|---|---|---|
+| T-27 | リサーチ：晴海の地域性（子どもの人数や年齢構成、ファミリー層、すでにある子ども向けの活動や団体） | Claude | 未着手 | 人の集め方（T-16）と定員（T-12）の材料。`notes/` に置いたら完了 |
+| T-32 | リサーチ：告知の手段（SNS、地域の掲示板やLINEのグループ、イベント告知サイト、学校を通じたチラシ配布のルール） | Claude | 未着手 | 人の集め方（T-16）の材料。`notes/` に置いたら完了 |
+| T-16 | 決める：人の集め方（はるみらいの掲載・館内掲示、HARUMI FLAG PORTの掲示板、SNS、知り合いや住民のつながりなど。どこに力を入れるか） | Claude（案）→ 永井 | 未着手 | T-27、T-32のあと。案を `notes/` に置く |
+| T-17 | サイトの残りの直し：AIっぽい説明文、「1回の流れ」との重なり、「つくれるもの」の4例、LINEで共有したときの画像、タブのアイコン | Claude Code（文言は永井が確認） | 未着手 | |
+| T-18 | 事前登録のテスト回答を削除する | 永井（どれがテストか確認）→ Claude Code | 未着手 | 2026-10-20夜に回答2件。テストかどうか未確認 |
+| T-19 | 開催告知と申込みフォームをサイトに置く | Claude Code | 未着手 | T-07、T-10〜T-13のあと |
+| T-20 | チラシ（A4、QRコード入り。はるみらい館内とHARUMI FLAG PORTの掲示板用） | Claude Code → 永井（掲示。PORTは事務局へ事前提出） | 未着手 | T-07、T-16、T-03・T-04の回答のあと |
+| T-21 | 事前登録者への開催案内メール（宛先はBCC） | Claude（下書き）→ 永井（送信） | 未着手 | T-19のあと |
+
+## 完了したもの
+
+| タスク | 完了日 | 成果物 |
+|---|---|---|
+| 決める：対象年齢 → 小学1年生〜中学生（当初の小学3年生〜から変更） | 2026-10-20 | サイトに反映（コミット 2e78c2f） |
+| 決める：第1回の時期 → 2027年1月ごろ | 2026-10-20 | サイトに掲載（コミット c1eb80d） |
+| 決める：事前登録の仕組み → Googleフォーム | 2026-10-20 | 下の事前登録フォーム |
+| サイトの対象年齢の表記をそろえる | 2026-10-20 | コミット 2e78c2f（4か所） |
+| 事前登録フォームをサイトに置く | 2026-10-20 | コミット c1eb80d。Googleフォーム「はるみAIラボ 事前登録」と連携スプレッドシート |
+| 運営サポーターの登録とボランティア保険の加入 | 2026-10-22 | はるみらいからの「ボランティア保険登録のお知らせ」メール（2026-10-22、加入確認書の控えPDF付き） |
+
+## 作業ログ
+
+- 2026-10-20：CLAUDE.md、TASKS.md、作業用フォルダを追加。対象年齢、第1回の時期、事前登録の仕組みを決定し、サイトに反映。
+- 2026-10-22：「成果物が残ったら完了」のルールを導入。運営サポーターのボランティア保険の加入完了を確認。
+- 2026-10-22：台帳を整理。「決めること」の表をなくし、各分野のタスク（「決める：」）に入れた。開催当日・開催後の作業や、お手本作品など今の段階では細かすぎるものを外し、第1回の開催までに必要なものに絞った。番号を振り直した。人の集め方とHARUMI FLAG CLUB事務局への確認を追加。
+- 2026-10-22：リサーチのタスクを追加（T-22〜T-27：問いと分析の切り口、競合、世の中の動向、AIの規制、子ども向けAIツール、晴海の地域性）。分け方はA〜Cのまま。
+- 2026-10-22：「今週やること」を追加。リサーチのタスクを追加（T-28〜T-32：参加費の相場、会場の比較、機材、1回完結の体験会のプログラム例、告知の手段）し、どの判断の材料になるかを書いた。
+- 2026-10-22：第1回（2027年1月中旬〜下旬）から逆算したスケジュールの目安を追加。
+</script>
+<script>
+(function(){
+  var DAY=86400000;
+  var START=new Date(2026,9,20), END=new Date(2027,1,1); // 2026/10/20 〜 2027/1/31
+  var SPAN=(END-START)/DAY;
+  var state={who:'all', data:null};
+
+  function pct(d){return Math.max(0,Math.min(100,(d-START)/DAY/SPAN*100));}
+  function yearOf(m){return m>=4?2026:2027;}
+  function lastDay(y,m){return new Date(y,m,0).getDate();}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function cells(line){var p=line.split('|');p.shift();p.pop();return p.map(function(x){return x.trim();});}
+
+  // 「10月下旬（〜10/31）」「11月上旬（11/1〜11/15）」「12月中旬〜下旬（〜12/28）」「1月上旬」を日付の範囲に
+  function parsePeriod(label){
+    var m=label.match(/(\d+)月(上旬|中旬|下旬)(?:〜(上旬|中旬|下旬))?/); if(!m) return null;
+    var mon=+m[1], y=yearOf(mon), j={'上旬':[1,10],'中旬':[11,20],'下旬':[21,0]};
+    var s=j[m[2]][0], eKey=m[3]||m[2], e=j[eKey][1]||lastDay(y,mon);
+    var ex=label.match(/[（(]\s*(?:(\d+)\/(\d+))?\s*〜\s*(\d+)\/(\d+)\s*[)）]/);
+    var start=new Date(y,mon-1,s), end=new Date(y,mon-1,e);
+    if(ex){ if(ex[1]) start=new Date(yearOf(+ex[1]),+ex[1]-1,+ex[2]); end=new Date(yearOf(+ex[3]),+ex[3]-1,+ex[4]); }
+    return {start:start,end:new Date(end.getTime()+DAY-1)};
+  }
+  function expandIds(text){
+    var ids=[]; text.replace(/T-(\d+)(?:〜T-(\d+))?/g,function(_,a,b){a=+a;b=b?+b:a;for(var i=a;i<=b;i++)ids.push(i);});
+    return ids;
+  }
+
+  function parse(md){
+    var lines=md.split(/\r?\n/), sec='', groups=[], cur=null, phases=[], week=[], done=[], updated='';
+    lines.forEach(function(l){
+      var h=l.match(/^##\s+(.*)/); if(h){sec=h[1].trim(); cur=null; if(/^[A-Z]\./.test(sec)){cur={title:sec,tasks:[]};groups.push(cur);} return;}
+      var u=l.match(/^最終更新：\s*(\S+)/); if(u){updated=u[1];return;}
+      if(/^\|\s*-/.test(l)) return;
+      if(sec.indexOf('スケジュール')===0 && /^\|/.test(l)){
+        var c=cells(l); if(c[0]==='時期') return; var r=parsePeriod(c[0]); if(!r) return;
+        phases.push({label:c[0],goal:c[1]||'',ids:expandIds(c[2]||''),start:r.start,end:r.end,ms:!c[2]});
+        return;
+      }
+      if(sec.indexOf('今週')===0){var w=l.match(/^\d+\.\s+(.*)/); if(w) week.push(w[1]); return;}
+      if(sec.indexOf('完了')===0 && /^\|/.test(l)){var d=cells(l); if(d[0]!=='タスク') done.push({name:d[0],date:d[1]||''}); return;}
+      if(cur && /^\|\s*T-\d+/.test(l)){
+        var t=cells(l); cur.tasks.push({id:+t[0].slice(2),label:t[0],name:t[1],who:t[2],st:t[3],memo:t[4]||''});
+      }
+    });
+    groups.forEach(function(g){g.tasks.forEach(function(t){
+      var ps=phases.filter(function(p){return p.ids.indexOf(t.id)>=0;});
+      if(ps.length){t.start=new Date(Math.min.apply(null,ps.map(function(p){return p.start;})));t.end=new Date(Math.max.apply(null,ps.map(function(p){return p.end;})));t.phases=ps.map(function(p){return p.label;}).join('、');}
+    });});
+    return {groups:groups,phases:phases,week:week,done:done,updated:updated};
+  }
+
+  function render(){
+    var d=state.data, chart=document.getElementById('chart'), now=new Date(), h=[];
+    // ヘッダー：月と時期
+    h.push('<div class="grid"><div class="row head"><div class="lab">作業</div><div class="track">');
+    for(var m=new Date(START.getFullYear(),START.getMonth(),1);m<END;m=new Date(m.getFullYear(),m.getMonth()+1,1)){
+      var l=pct(m<START?START:m); h.push('<span class="mon" style="left:'+l+'%">'+(m.getMonth()+1)+'月'+(m.getMonth()===0?'（2027）':'')+'</span>');
+    }
+    d.phases.forEach(function(p){var l=pct(p.start),w=pct(p.end)-l;h.push('<span class="phase'+(p.ms?' ms':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(p.label+'：'+p.goal)+'">'+esc(p.goal)+'</span>');});
+    h.push('</div></div>');
+    var nodate=[];
+    d.groups.forEach(function(g){
+      var ts=g.tasks.filter(match); if(!ts.length) return;
+      h.push('<div class="row group"><div class="lab">'+esc(g.title)+'</div><div class="track"></div></div>');
+      ts.sort(function(a,b){return (a.start||END)-(b.start||END)||a.id-b.id;}).forEach(function(t){h.push(row(t,now));});
+    });
+    // 目盛りの縦線と今日の線
+    h.push('<div class="overlay">');
+    d.phases.forEach(function(p){h.push('<i class="vline" style="left:'+pct(p.start)+'%"></i>');});
+    if(now>=START&&now<END){var tl=pct(now);h.push('<i class="todayline" style="left:'+tl+'%"></i><span class="todaytag" style="left:'+tl+'%">今日 '+(now.getMonth()+1)+'/'+now.getDate()+'</span>');}
+    h.push('</div></div>');
+    chart.innerHTML=h.join('');
+  }
+  function match(t){return state.who==='all'||t.who.indexOf(state.who)>=0;}
+  function row(t,now){
+    var bar;
+    if(t.start){
+      var late=t.end<now&&t.st!=='完了';
+      var l=pct(t.start),w=Math.max(.6,pct(t.end)-l);
+      bar='<i class="bar '+esc(t.st)+(late?' late':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(t.label+' '+t.phases+(late?'（目安を過ぎています）':''))+'"></i>';
+    } else bar='<span class="nodate">時期未定</span>';
+    return '<div class="row"><div class="lab"><div class="name"><span class="id">'+esc(t.label)+'</span>'+esc(t.name)+'</div>'+
+      '<div class="meta"><span class="chip st-'+esc(t.st)+'">'+esc(t.st)+'</span><span class="who">'+esc(t.who)+'</span></div></div>'+
+      '<div class="track" title="'+esc(t.memo)+'">'+bar+'</div></div>';
+  }
+  function renderSide(){
+    var d=state.data;
+    if(d.week.length){document.getElementById('weekList').innerHTML=d.week.map(function(w){return '<li>'+esc(w)+'</li>';}).join('');document.getElementById('week').hidden=false;}
+    if(d.done.length){document.getElementById('doneList').innerHTML=d.done.map(function(x){return '<li>'+esc(x.name)+' <small>'+esc(x.date)+'</small></li>';}).join('');document.getElementById('done').hidden=false;}
+  }
+  function start(md,from){
+    state.data=parse(md);
+    var n=0; state.data.groups.forEach(function(g){n+=g.tasks.length;});
+    document.getElementById('src').innerHTML='台帳（TASKS.md）の最終更新：<b>'+esc(state.data.updated||'不明')+'</b>　・　残りの作業 '+n+'件　・　'+from;
+    renderSide(); render();
+  }
+  document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
+    state.who=b.dataset.who; document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b);}); render();
+  });});
+
+  var snap=document.getElementById('snapshot').textContent;
+  fetch('TASKS.md',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();})
+    .then(function(t){if(t.indexOf('## スケジュール')<0)throw 0;start(t,'GitHubの最新の台帳から表示');})
+    .catch(function(){start(snap,'保存時点の台帳の写しから表示');});
+})();
+</script>
+
+</body>
+</html>
