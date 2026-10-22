@@ -56,7 +56,7 @@ p{margin:0}
 .sw{width:18px;height:10px;border-radius:2px;display:inline-block}
 
 .chart{background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow-x:auto}
-.grid{min-width:880px;position:relative}
+.grid{min-width:1000px;position:relative}
 .row{display:grid;grid-template-columns:var(--lw) 1fr;border-bottom:1px solid var(--grid)}
 .row:last-child{border-bottom:0}
 .lab{position:sticky;left:0;z-index:2;background:var(--paper);padding:7px 12px;border-right:1px solid var(--line);min-width:0;display:grid;gap:2px}
@@ -81,8 +81,12 @@ p{margin:0}
 .nodate{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--muted)}
 
 .head .lab{font-size:.78rem;color:var(--muted);font-weight:700;justify-content:end;align-content:end}
-.head .track{min-height:58px}
-.mon{position:absolute;top:4px;font-size:.78rem;font-weight:700;padding-left:6px;border-left:1px solid var(--line);height:calc(100% - 4px)}
+.head .track{min-height:92px}
+.wk{position:absolute;top:24px;height:34px;font-size:.62rem;color:var(--muted);text-align:center;line-height:1.25;border-left:1px solid var(--grid);padding-top:2px;font-variant-numeric:tabular-nums}
+.wk b{display:block;font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--ink)}
+.wk.now{background:var(--sun-soft)}
+.wkchip{font-family:var(--mono);font-size:.7rem;color:var(--sea);font-variant-numeric:tabular-nums}
+.mon{position:absolute;top:2px;font-size:.78rem;font-weight:700;padding-left:6px;border-left:1px solid var(--line);height:22px}
 .phase{position:absolute;bottom:4px;height:22px;font-size:.7rem;color:var(--muted);padding:2px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-left:2px solid var(--sea);background:var(--sea-soft)}
 .phase.ms{border-left-color:var(--today);background:var(--sun-soft);color:var(--ink);font-weight:700}
 .group .lab{font-family:var(--display);font-weight:700;font-size:.88rem;background:var(--bg)}
@@ -133,7 +137,7 @@ p{margin:0}
   </div>
 
   <div class="chart" id="chart"></div>
-  <p class="note">バーの長さは、台帳の「スケジュール（目安）」に書かれた時期です。複数の時期に出てくる作業は、最初から最後までをつなげています。時期が書かれていない作業は「時期未定」に表示します。</p>
+  <p class="note">週は月曜はじまりで、W1は2026年10月19日の週、W15は2027年1月25日の週です。バーの長さは、台帳の「スケジュール（目安）」に書かれた時期です。複数の時期に出てくる作業は、最初から最後までをつなげています。時期が書かれていない作業は「時期未定」に表示します。</p>
 
   <section class="done" id="done" hidden>
     <h2>完了したもの</h2>
@@ -153,21 +157,22 @@ p{margin:0}
 - **完了にするのは、成果物が残ったときだけ。** 話し合っただけでは完了にしない。完了にしたら「成果物・メモ」欄に、何がどこにあるかを書き、下の「完了したもの」に移す（詳しくは CLAUDE.md の「完了の基準」）。
 - 載せるのは、第1回の開催までに必要なことだけ。開催当日や開催後の作業は、第1回の内容が決まってから足す。
 - 毎朝、定期実行のClaudeがメール・チャット・コミット履歴をもとに更新する。
+- 工程表（ガントチャート）：https://yusukenagai.github.io/harumi_AI_lab/gantt.html 。このファイルを読み込んで自動で描くので、表やスケジュールの書き方（列の並び、「T-◯◯」の番号、時期の書き方「11月上旬（11/1〜11/15）」など）を崩さない。
 - このファイルは公開されている。メールアドレス、登録者の情報、職員の個人名、メールの本文は書かない。
 
 ## スケジュール（目安）
 
-第1回を2027年1月中旬〜下旬の週末に開く前提で、逆算した目安。はるみらいの予約開始時期や、メールの返事の内容によって見直す。
+第1回を2027年1月中旬〜下旬の週末に開く前提で、逆算した目安。週は月曜はじまりで、W1は2026年10月19日の週（W11は年末年始の休み）。はるみらいの予約開始時期や、メールの返事の内容によって見直す。
 
-| 時期 | ゴール | 主なタスク |
-|---|---|---|
-| 10月下旬（〜10/31） | 確認メールを出し、リサーチを始める | T-02・T-03・T-04（メール送信）、T-22（リサーチの問い）、T-25・T-26・T-31（リサーチ） |
-| 11月上旬（11/1〜11/15） | 第1回の中身を決める | T-07（第1回の内容）、T-08（AIツール）、T-09（小1・2の参加方法）、T-01（利用登録。11/8の建築クラブの日にあわせて）、T-06（運営サポーター1回目）、残りのリサーチ（T-23・T-24・T-27〜T-30・T-32） |
-| 11月下旬（11/16〜11/30） | 場所・お金・人数・集め方を決め、会場を押さえる | T-10（場所）、T-11（参加費）、T-12（定員・機材）、T-16（人の集め方）、T-13（日程と予約）、T-05（保険を調べる）、T-17・T-18（サイトの直し） |
-| 12月上旬（12/1〜12/15） | 告知を始めて、申込みを受け付ける | T-19（告知と申込みフォーム）、T-20（チラシ。PORTの掲示板は事務局の確認に日数がかかる）、T-21（事前登録者への案内）、はるみらいHPのお知らせ欄の更新 |
-| 12月中旬〜下旬（〜12/28） | 教材と保護者向け資料をそろえる | T-14（進行表と教材）、T-15（保護者向け資料）、T-05（保険に加入） |
-| 1月上旬 | 最終準備 | 申込みの締切と参加者への最終案内、機材の準備、通しで一度試す |
-| 1月中旬〜下旬 | 第1回を開催 | |
+| 時期 | 週 | ゴール | 主なタスク |
+|---|---|---|---|
+| 10月下旬（〜10/31） | W1〜W2 | 確認メールを出し、リサーチを始める | T-02・T-03・T-04（メール送信）、T-22（リサーチの問い）、T-25・T-26・T-31（リサーチ） |
+| 11月上旬（11/1〜11/15） | W3〜W4 | 第1回の中身を決める | T-07（第1回の内容）、T-08（AIツール）、T-09（小1・2の参加方法）、T-01（利用登録。11/8の建築クラブの日にあわせて）、T-06（運営サポーター1回目）、残りのリサーチ（T-23・T-24・T-27〜T-30・T-32） |
+| 11月下旬（11/16〜11/30） | W5〜W6 | 場所・お金・人数・集め方を決め、会場を押さえる | T-10（場所）、T-11（参加費）、T-12（定員・機材）、T-16（人の集め方）、T-13（日程と予約）、T-05（保険を調べる）、T-17・T-18（サイトの直し） |
+| 12月上旬（12/1〜12/15） | W7〜W8 | 告知を始めて、申込みを受け付ける | T-19（告知と申込みフォーム）、T-20（チラシ。PORTの掲示板は事務局の確認に日数がかかる）、T-21（事前登録者への案内）、はるみらいHPのお知らせ欄の更新 |
+| 12月中旬〜下旬（〜12/28） | W9〜W10 | 教材と保護者向け資料をそろえる | T-14（進行表と教材）、T-15（保護者向け資料）、T-05（保険に加入） |
+| 1月上旬 | W12 | 最終準備 | 申込みの締切と参加者への最終案内、機材の準備、通しで一度試す |
+| 1月中旬〜下旬 | W13〜W15 | 第1回を開催 | |
 
 - 告知期間を1か月以上とるため、12月上旬には申込みを始めたい。そこから逆算して、場所・日程・参加費は11月中に決める。
 - 年末年始は、はるみらいや各所が休みになるので、12月28日ごろまでに準備のめどをつける。
@@ -249,15 +254,19 @@ p{margin:0}
 - 2026-10-22：リサーチのタスクを追加（T-22〜T-27：問いと分析の切り口、競合、世の中の動向、AIの規制、子ども向けAIツール、晴海の地域性）。分け方はA〜Cのまま。
 - 2026-10-22：「今週やること」を追加。リサーチのタスクを追加（T-28〜T-32：参加費の相場、会場の比較、機材、1回完結の体験会のプログラム例、告知の手段）し、どの判断の材料になるかを書いた。
 - 2026-10-22：第1回（2027年1月中旬〜下旬）から逆算したスケジュールの目安を追加。
+- 2026-10-22：工程表（gantt.html）を追加し、スケジュールに週（W1〜W15）の列を足した。
 </script>
 <script>
 (function(){
   var DAY=86400000;
-  var START=new Date(2026,9,20), END=new Date(2027,1,1); // 2026/10/20 〜 2027/1/31
+  var START=new Date(2026,9,19), END=new Date(2027,1,1); // 週は月曜はじまり。W1＝2026/10/19〜10/25、W15＝2027/1/25〜1/31
+  var WEEK=7*DAY, NW=Math.round((END-START)/WEEK);
   var SPAN=(END-START)/DAY;
   var state={who:'all', data:null};
 
   function pct(d){return Math.max(0,Math.min(100,(d-START)/DAY/SPAN*100));}
+  function wk(d){return Math.floor((d-START)/WEEK)+1;}
+  function md(d){return (d.getMonth()+1)+'/'+d.getDate();}
   function yearOf(m){return m>=4?2026:2027;}
   function lastDay(y,m){return new Date(y,m,0).getDate();}
   function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -271,7 +280,9 @@ p{margin:0}
     var ex=label.match(/[（(]\s*(?:(\d+)\/(\d+))?\s*〜\s*(\d+)\/(\d+)\s*[)）]/);
     var start=new Date(y,mon-1,s), end=new Date(y,mon-1,e);
     if(ex){ if(ex[1]) start=new Date(yearOf(+ex[1]),+ex[1]-1,+ex[2]); end=new Date(yearOf(+ex[3]),+ex[3]-1,+ex[4]); }
-    return {start:start,end:new Date(end.getTime()+DAY-1)};
+    // 週単位にそろえる：週の後半（金〜日）に始まる時期は翌週から、週の前半に終わる時期は前の週まで
+    var ws=wk(new Date(start.getTime()+3*DAY)), we=Math.max(ws,wk(new Date(end.getTime()-3*DAY)));
+    return {start:new Date(START.getTime()+(ws-1)*WEEK),end:new Date(START.getTime()+we*WEEK-1)};
   }
   function expandIds(text){
     var ids=[]; text.replace(/T-(\d+)(?:〜T-(\d+))?/g,function(_,a,b){a=+a;b=b?+b:a;for(var i=a;i<=b;i++)ids.push(i);});
@@ -279,14 +290,15 @@ p{margin:0}
   }
 
   function parse(md){
-    var lines=md.split(/\r?\n/), sec='', groups=[], cur=null, phases=[], week=[], done=[], updated='';
+    var col={goal:1,tasks:2}, lines=md.split(/\r?\n/), sec='', groups=[], cur=null, phases=[], week=[], done=[], updated='';
     lines.forEach(function(l){
       var h=l.match(/^##\s+(.*)/); if(h){sec=h[1].trim(); cur=null; if(/^[A-Z]\./.test(sec)){cur={title:sec,tasks:[]};groups.push(cur);} return;}
       var u=l.match(/^最終更新：\s*(\S+)/); if(u){updated=u[1];return;}
       if(/^\|\s*-/.test(l)) return;
       if(sec.indexOf('スケジュール')===0 && /^\|/.test(l)){
-        var c=cells(l); if(c[0]==='時期') return; var r=parsePeriod(c[0]); if(!r) return;
-        phases.push({label:c[0],goal:c[1]||'',ids:expandIds(c[2]||''),start:r.start,end:r.end,ms:!c[2]});
+        var c=cells(l); if(c[0]==='時期'){col={goal:c.indexOf('ゴール'),tasks:c.indexOf('主なタスク')};return;}
+        var r=parsePeriod(c[0]); if(!r) return; var gl=c[col.goal]||'', tk=c[col.tasks]||'';
+        phases.push({label:c[0],goal:gl,ids:expandIds(tk),start:r.start,end:r.end,ms:!tk});
         return;
       }
       if(sec.indexOf('今週')===0){var w=l.match(/^\d+\.\s+(.*)/); if(w) week.push(w[1]); return;}
@@ -309,6 +321,8 @@ p{margin:0}
     for(var m=new Date(START.getFullYear(),START.getMonth(),1);m<END;m=new Date(m.getFullYear(),m.getMonth()+1,1)){
       var l=pct(m<START?START:m); h.push('<span class="mon" style="left:'+l+'%">'+(m.getMonth()+1)+'月'+(m.getMonth()===0?'（2027）':'')+'</span>');
     }
+    var nowW=wk(new Date());
+    for(var i=0;i<NW;i++){var ws=new Date(START.getTime()+i*WEEK);h.push('<span class="wk'+(i+1===nowW?' now':'')+'" style="left:'+(i/NW*100)+'%;width:'+(100/NW)+'%"><b>W'+(i+1)+'</b>'+md(ws)+'</span>');}
     d.phases.forEach(function(p){var l=pct(p.start),w=pct(p.end)-l;h.push('<span class="phase'+(p.ms?' ms':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(p.label+'：'+p.goal)+'">'+esc(p.goal)+'</span>');});
     h.push('</div></div>');
     var nodate=[];
@@ -319,7 +333,7 @@ p{margin:0}
     });
     // 目盛りの縦線と今日の線
     h.push('<div class="overlay">');
-    d.phases.forEach(function(p){h.push('<i class="vline" style="left:'+pct(p.start)+'%"></i>');});
+    for(var k=1;k<NW;k++){h.push('<i class="vline" style="left:'+(k/NW*100)+'%"></i>');}
     if(now>=START&&now<END){var tl=pct(now);h.push('<i class="todayline" style="left:'+tl+'%"></i><span class="todaytag" style="left:'+tl+'%">今日 '+(now.getMonth()+1)+'/'+now.getDate()+'</span>');}
     h.push('</div></div>');
     chart.innerHTML=h.join('');
@@ -330,10 +344,11 @@ p{margin:0}
     if(t.start){
       var late=t.end<now&&t.st!=='完了';
       var l=pct(t.start),w=Math.max(.6,pct(t.end)-l);
-      bar='<i class="bar '+esc(t.st)+(late?' late':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(t.label+' '+t.phases+(late?'（目安を過ぎています）':''))+'"></i>';
+      t.wk='W'+wk(t.start)+(wk(t.end)!==wk(t.start)?'〜W'+wk(t.end):'');
+      bar='<i class="bar '+esc(t.st)+(late?' late':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(t.label+' '+t.wk+'（'+md(t.start)+'〜'+md(t.end)+'）'+(late?' 目安を過ぎています':''))+'"></i>';
     } else bar='<span class="nodate">時期未定</span>';
     return '<div class="row"><div class="lab"><div class="name"><span class="id">'+esc(t.label)+'</span>'+esc(t.name)+'</div>'+
-      '<div class="meta"><span class="chip st-'+esc(t.st)+'">'+esc(t.st)+'</span><span class="who">'+esc(t.who)+'</span></div></div>'+
+      '<div class="meta"><span class="chip st-'+esc(t.st)+'">'+esc(t.st)+'</span>'+(t.wk?'<span class="wkchip">'+t.wk+'</span>':'')+'<span class="who">'+esc(t.who)+'</span></div></div>'+
       '<div class="track" title="'+esc(t.memo)+'">'+bar+'</div></div>';
   }
   function renderSide(){
