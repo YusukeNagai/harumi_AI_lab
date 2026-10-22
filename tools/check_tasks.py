@@ -109,9 +109,14 @@ def main():
             tid = int(c[0][2:])
             if tid in tasks:
                 errors.append(f"{n}行目：{c[0]} が重複している")
-            if c[3] not in STATES:
-                errors.append(f"{n}行目：{c[0]} の状態「{c[3]}」が決まった言葉でない（{'/'.join(sorted(STATES))}）")
-            if c[3] == "完了":
+            # 状態欄は「作業中」または「作業中（40%）」の形（gantt.html の parseState と同じ）
+            sm = re.fullmatch(r"\s*([^\s（(]+)\s*(?:[（(]?\s*(\d{1,3})\s*[%％]\s*[)）]?)?\s*", c[3])
+            st = sm.group(1) if sm else c[3]
+            if st not in STATES:
+                errors.append(f"{n}行目：{c[0]} の状態「{c[3]}」が読めない（{'/'.join(sorted(STATES))}。割合は「作業中（40%）」の形）")
+            elif sm.group(2) and int(sm.group(2)) > 100:
+                errors.append(f"{n}行目：{c[0]} の割合が100%を超えている")
+            if st == "完了":
                 warnings.append(f"{c[0]} は完了なので「完了したもの」に移す")
             tasks[tid] = {"label": c[0], "name": c[1], "who": c[2], "st": c[3], "group": group}
 
@@ -140,7 +145,7 @@ def main():
     this_w = [t for t in tasks.values() if "weeks" in t and t["weeks"][0] <= now_w <= t["weeks"][1] and t["st"] != "完了"]
 
     print(f"台帳の最終更新：{updated}　今日：{today}（W{now_w}）")
-    counts = {s: sum(1 for t in tasks.values() if t["st"] == s) for s in ["未着手", "作業中", "確認待ち", "保留"]}
+    counts = {s: sum(1 for t in tasks.values() if t["st"].startswith(s)) for s in ["未着手", "作業中", "確認待ち", "保留"]}
     print("残りの作業：" + "、".join(f"{k} {v}" for k, v in counts.items()) + f"（計 {len(tasks)}）／完了 {len(done)}")
 
     def show(title, ts):
@@ -152,7 +157,7 @@ def main():
 
     show("目安を過ぎている", late)
     show("今週が目安に入っている", this_w)
-    show("確認待ち（永井さんの確認が必要）", [t for t in tasks.values() if t["st"] == "確認待ち"])
+    show("確認待ち（永井さんの確認が必要）", [t for t in tasks.values() if t["st"].startswith("確認待ち")])
     show("時期未定（工程表で「時期未定」になる）", nodate)
 
     for w in warnings:

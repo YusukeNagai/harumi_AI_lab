@@ -71,13 +71,18 @@ p{margin:0}
 .st-保留{background:var(--grid);color:var(--muted)}
 .who{font-size:.7rem;color:var(--muted)}
 .track{position:relative;min-height:44px}
-.bar{position:absolute;top:50%;height:16px;margin-top:-8px;border-radius:3px;min-width:6px}
-.bar.未着手{background:var(--sea-soft);border:1px solid var(--sea)}
-.bar.作業中{background:var(--sea)}
-.bar.確認待ち{background:var(--sun)}
-.bar.完了{background:var(--done)}
-.bar.保留{background:var(--hold)}
+/* バーは枠。中の塗りが進み具合（%）の分だけ左から満ちる */
+.bar{position:absolute;top:50%;height:16px;margin-top:-8px;border-radius:3px;min-width:6px;--c:var(--sea);border:1px solid var(--c);background:var(--paper);overflow:hidden}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--c)}
+.bar.確認待ち{--c:var(--sun)}
+.bar.完了{--c:var(--done)}
+.bar.保留{--c:var(--hold)}
 .bar.late{outline:2px solid var(--today);outline-offset:1px}
+.pcttag{position:absolute;top:50%;transform:translateY(-50%);margin-left:6px;font-family:var(--mono);font-size:.68rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.prog{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted)}
+.prog .meter{width:160px;height:8px;border-radius:4px;background:var(--grid);overflow:hidden}
+.prog .meter i{display:block;height:100%;background:var(--done)}
+.prog b{font-family:var(--mono);font-weight:500;color:var(--ink)}
 .nodate{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--muted)}
 
 .head .lab{font-size:.78rem;color:var(--muted);font-weight:700;justify-content:end;align-content:end}
@@ -114,6 +119,7 @@ p{margin:0}
   <header class="top">
     <h1>はるみ<span class="ai">AI</span>ラボ 工程表</h1>
     <p class="src" id="src">台帳を読み込んでいます…</p>
+    <p class="prog" id="prog" hidden></p>
   </header>
 
   <section class="week" id="week" hidden>
@@ -128,21 +134,16 @@ p{margin:0}
       <button type="button" data-who="Claude" aria-pressed="false">Claude</button>
     </div>
     <div class="legend" aria-label="凡例">
-      <span><i class="sw" style="background:var(--sea-soft);border:1px solid var(--sea)"></i>未着手</span>
-      <span><i class="sw" style="background:var(--sea)"></i>作業中</span>
-      <span><i class="sw" style="background:var(--sun)"></i>確認待ち</span>
-      <span><i class="sw" style="background:var(--hold)"></i>保留</span>
+      <span><i class="sw" style="background:var(--paper);border:1px solid var(--sea)"></i>未着手</span>
+      <span><i class="sw" style="background:linear-gradient(90deg,var(--sea) 50%,var(--paper) 50%);border:1px solid var(--sea)"></i>作業中（塗り＝進み具合）</span>
+      <span><i class="sw" style="background:linear-gradient(90deg,var(--sun) 90%,var(--paper) 90%);border:1px solid var(--sun)"></i>確認待ち</span>
+      <span><i class="sw" style="background:var(--paper);border:1px solid var(--hold)"></i>保留</span>
       <span><i class="sw" style="background:var(--paper);outline:2px solid var(--today)"></i>目安を過ぎている</span>
     </div>
   </div>
 
   <div class="chart" id="chart"></div>
-  <p class="note">週は月曜はじまりで、W1は2026年10月19日の週、W15は2027年1月25日の週です。バーの長さは、台帳の「スケジュール（目安）」に書かれた時期です。複数の時期に出てくる作業は、最初から最後までをつなげています。時期が書かれていない作業は「時期未定」に表示します。</p>
-
-  <section class="done" id="done" hidden>
-    <h2>完了したもの</h2>
-    <ul id="doneList"></ul>
-  </section>
+  <p class="note">週は月曜はじまりで、W1は2026年10月19日の週、W15は2027年1月25日の週です。バーの長さは、台帳の「スケジュール（目安）」に書かれた時期です。複数の時期に出てくる作業は、最初から最後までをつなげています。時期が書かれていない作業は「時期未定」に表示します。バーの中の塗りは進み具合です。台帳の状態欄に「作業中（40%）」のように書けばその割合で、書いていなければ状態から目安（未着手・保留 0%、作業中 50%、確認待ち 90%、完了 100%）で塗ります。</p>
 </div>
 
 <script type="text/plain" id="snapshot"># はるみAIラボ タスク台帳
@@ -269,7 +270,8 @@ p{margin:0}
   function md(d){return (d.getMonth()+1)+'/'+d.getDate();}
   function yearOf(m){return m>=4?2026:2027;}
   function lastDay(y,m){return new Date(y,m,0).getDate();}
-  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  // 表示では「T-04」の「T-」を省いて「04」にする（台帳の番号はT-のまま）
+  function esc(t){return String(t).replace(/T-(?=\d)/g,'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function cells(line){var p=line.split('|');p.shift();p.pop();return p.map(function(x){return x.trim();});}
 
   // 「10月下旬（〜10/31）」「11月上旬（11/1〜11/15）」「12月中旬〜下旬（〜12/28）」「1月上旬」を日付の範囲に
@@ -289,6 +291,14 @@ p{margin:0}
     return ids;
   }
 
+  // 状態欄「作業中（40%）」→ 作業中・40。割合がなければ状態から目安を入れる
+  var DEFAULT_PCT={'未着手':0,'作業中':50,'確認待ち':90,'完了':100,'保留':0};
+  function parseState(text){
+    var m=String(text||'').match(/^\s*([^\s（(]+)\s*(?:[（(]?\s*(\d{1,3})\s*[%％]\s*[)）]?)?\s*$/);
+    var st=m?m[1]:String(text||'').trim(), p=m&&m[2]!=null?Math.min(100,+m[2]):DEFAULT_PCT[st];
+    return {st:st,pct:p==null?0:p};
+  }
+
   function parse(md){
     var col={goal:1,tasks:2}, lines=md.split(/\r?\n/), sec='', groups=[], cur=null, phases=[], week=[], done=[], updated='';
     lines.forEach(function(l){
@@ -302,9 +312,9 @@ p{margin:0}
         return;
       }
       if(sec.indexOf('今週')===0){var w=l.match(/^\d+\.\s+(.*)/); if(w) week.push(w[1]); return;}
-      if(sec.indexOf('完了')===0 && /^\|/.test(l)){var d=cells(l); if(d[0]!=='タスク') done.push({name:d[0],date:d[1]||''}); return;}
+      if(sec.indexOf('完了')===0 && /^\|/.test(l)){var d=cells(l); if(d[0]!=='タスク') done.push({name:d[0],date:d[1]||'',out:d[2]||''}); return;}
       if(cur && /^\|\s*T-\d+/.test(l)){
-        var t=cells(l); cur.tasks.push({id:+t[0].slice(2),label:t[0],name:t[1],who:t[2],st:t[3],memo:t[4]||''});
+        var t=cells(l), s=parseState(t[3]); cur.tasks.push({id:+t[0].slice(2),label:t[0],name:t[1],who:t[2],st:s.st,pct:s.pct,memo:t[4]||''});
       }
     });
     groups.forEach(function(g){g.tasks.forEach(function(t){
@@ -329,8 +339,18 @@ p{margin:0}
     d.groups.forEach(function(g){
       var ts=g.tasks.filter(match); if(!ts.length) return;
       h.push('<div class="row group"><div class="lab">'+esc(g.title)+'</div><div class="track"></div></div>');
-      ts.sort(function(a,b){return (a.start||END)-(b.start||END)||a.id-b.id;}).forEach(function(t){h.push(row(t,now));});
+      // 完了したものは各分野の下にまとめる
+      ts.sort(function(a,b){return (a.st==='完了')-(b.st==='完了')||(a.start||END)-(b.start||END)||a.id-b.id;}).forEach(function(t){h.push(row(t,now));});
     });
+    // 台帳の「完了したもの」は、いちばん下に完了した週のバーとして並べる
+    if(d.done.length&&state.who==='all'){
+      h.push('<div class="row group"><div class="lab">完了したもの</div><div class="track"></div></div>');
+      d.done.slice().sort(function(a,b){return a.date<b.date?-1:a.date>b.date?1:0;}).forEach(function(x){
+        var m=x.date.match(/(\d{4})-(\d{1,2})-(\d{1,2})/), t={label:'済',name:x.name,who:x.date,st:'完了',pct:100,memo:x.out};
+        if(m){var dd=new Date(+m[1],+m[2]-1,+m[3]), w=wk(dd); t.start=new Date(START.getTime()+(w-1)*WEEK); t.end=new Date(START.getTime()+w*WEEK-1);}
+        h.push(row(t,now));
+      });
+    }
     // 目盛りの縦線と今日の線
     h.push('<div class="overlay">');
     for(var k=1;k<NW;k++){h.push('<i class="vline" style="left:'+(k/NW*100)+'%"></i>');}
@@ -345,7 +365,8 @@ p{margin:0}
       var late=t.end<now&&t.st!=='完了';
       var l=pct(t.start),w=Math.max(.6,pct(t.end)-l);
       t.wk='W'+wk(t.start)+(wk(t.end)!==wk(t.start)?'〜W'+wk(t.end):'');
-      bar='<i class="bar '+esc(t.st)+(late?' late':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(t.label+' '+t.wk+'（'+md(t.start)+'〜'+md(t.end)+'）'+(late?' 目安を過ぎています':''))+'"></i>';
+      bar='<i class="bar '+esc(t.st)+(late?' late':'')+'" style="left:'+l+'%;width:'+w+'%" title="'+esc(t.label+' '+t.wk+'（'+md(t.start)+'〜'+md(t.end)+'） 進み具合 '+t.pct+'%'+(late?' 目安を過ぎています':''))+'"><span class="fill" style="width:'+t.pct+'%"></span></i>'+
+        '<span class="pcttag" style="left:'+(l+w)+'%">'+t.pct+'%</span>';
     } else bar='<span class="nodate">時期未定</span>';
     return '<div class="row"><div class="lab"><div class="name"><span class="id">'+esc(t.label)+'</span>'+esc(t.name)+'</div>'+
       '<div class="meta"><span class="chip st-'+esc(t.st)+'">'+esc(t.st)+'</span>'+(t.wk?'<span class="wkchip">'+t.wk+'</span>':'')+'<span class="who">'+esc(t.who)+'</span></div></div>'+
@@ -354,12 +375,16 @@ p{margin:0}
   function renderSide(){
     var d=state.data;
     if(d.week.length){document.getElementById('weekList').innerHTML=d.week.map(function(w){return '<li>'+esc(w)+'</li>';}).join('');document.getElementById('week').hidden=false;}
-    if(d.done.length){document.getElementById('doneList').innerHTML=d.done.map(function(x){return '<li>'+esc(x.name)+' <small>'+esc(x.date)+'</small></li>';}).join('');document.getElementById('done').hidden=false;}
   }
   function start(md,from){
     state.data=parse(md);
     var n=0; state.data.groups.forEach(function(g){n+=g.tasks.length;});
     document.getElementById('src').innerHTML='台帳（TASKS.md）の最終更新：<b>'+esc(state.data.updated||'不明')+'</b>　・　残りの作業 '+n+'件　・　'+from;
+    // 全体の進み具合：完了したものは100%、残りは各作業の割合で平均する
+    var sum=state.data.done.length*100; state.data.groups.forEach(function(g){g.tasks.forEach(function(t){sum+=t.pct;});});
+    var all=n+state.data.done.length, ov=all?Math.round(sum/all):0, pg=document.getElementById('prog');
+    pg.innerHTML='全体の進み具合 <span class="meter"><i style="width:'+ov+'%"></i></span><b>'+ov+'%</b>（完了 '+state.data.done.length+'件／全 '+all+'件）';
+    pg.hidden=false;
     renderSide(); render();
   }
   document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
