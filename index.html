@@ -6,7 +6,18 @@
 <meta name="description" content="晴海で開く、小学1年生〜中学生と保護者様のためのAI教室。講師は永井悠資。">
 <meta property="og:title" content="はるみAIラボ">
 <meta property="og:description" content="晴海で開く、小学1年生〜中学生と保護者様のためのAI教室。">
-<meta property="og:image" content="img/talk-level-sharp.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yusukenagai.github.io/harumi_AI_lab/">
+<meta property="og:site_name" content="はるみAIラボ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://yusukenagai.github.io/harumi_AI_lab/img/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="はるみAIラボ　晴海で開く、こどものためのAI教室">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <style>body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>はるみAIラボ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,23 +109,13 @@ section h2{font-size:clamp(1.85rem,4.6vw,2.6rem);font-weight:900;line-height:1.3
 .point h3{font-size:1.4rem;font-weight:700}
 .point p{margin-top:6px;color:var(--muted);font-size:.95rem}
 
-.makes{display:grid;grid-template-columns:repeat(2,1fr);column-gap:32px;margin-top:22px}
-.make{border-bottom:1px solid var(--line);padding-block:14px;min-width:0}
-.make h3{font-size:1.3rem;font-weight:700;color:var(--sea)}
-.make p{margin-top:4px;font-size:.93rem;color:var(--muted)}
+.makes{display:grid;grid-template-columns:14em 1fr;margin:22px 0 0;max-width:46em}
+.makes dt,.makes dd{border-bottom:1px solid var(--line);padding-block:14px;margin:0;min-width:0}
+.makes dt{font-size:1.15rem;font-weight:700;color:var(--sea)}
+.makes dd{color:var(--muted);font-size:.95rem}
 .note{margin-top:14px;font-size:.82rem;color:var(--muted)}
-
-/* timeline: 実際の進行順 */
-.flow{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:0}
-.flow{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:40px}
-.flow li{position:relative;padding:16px 18px;border:1px solid var(--line);border-radius:2px;background:var(--paper);min-width:0}
-.flow li:not(:last-child)::after{content:"";position:absolute;top:50%;right:-27px;transform:translateY(-50%);width:0;height:0;border-style:solid;border-width:8px 0 8px 12px;border-color:transparent transparent transparent var(--sea)}
-@media (max-width:760px){
-  .flow{grid-template-columns:1fr;row-gap:40px}
-  .flow li:not(:last-child)::after{top:auto;right:auto;bottom:-27px;left:50%;transform:translateX(-50%);border-width:12px 8px 0 8px;border-color:var(--sea) transparent transparent transparent}
-}
-.flow h3{font-size:1.3rem;font-weight:700}
-.flow p{font-size:.93rem;color:var(--muted)}
+.steps-lead{margin-top:28px;font-weight:700}
+.steps-lead + .points{margin-top:14px}
 
 /* profile */
 .profile{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;margin-top:26px}
@@ -176,6 +177,8 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
   .hero-photo img{aspect-ratio:4/3}
   .points{grid-template-columns:1fr}
   .makes{grid-template-columns:1fr}
+  .makes dt{border-bottom:0;padding-bottom:4px}
+  .makes dd{padding-top:0}
   .profile{grid-template-columns:1fr}
   .photo{width:180px}
   .info dl{grid-template-columns:1fr}
@@ -198,7 +201,6 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
     </a>
     <nav aria-label="ページ内リンク">
       <a href="#about">教室について</a>
-      <a href="#flow">1回の流れ</a>
       <a href="#teacher">講師</a>
       <a href="#info">開催について</a>
       <a href="#register">事前登録</a>
@@ -223,7 +225,8 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
 
     <section id="about">
       <h2>はるみAIラボってどんなところ？</h2>
-      <p class="sec-lead">AIを「答えを出してくれる機械」ではなく、アイデアを広げてくれる相棒として使います。主役は、こどもの「やってみたい」です。</p>
+      <p class="sec-lead">何をつくるかは、こども自身が決めます。AIには、アイデアを広げたり、形にしたりする手伝いをしてもらいます。</p>
+      <p class="steps-lead" id="flow">1回は、この順に進めます（60分〜。人数や内容に合わせて調整します）。</p>
       <ol class="points steps" aria-label="考える、つくる、届けるの順に進みます">
         <li class="point">
           <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /> </svg>
@@ -233,7 +236,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
         <li class="point">
           <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13" /> <path d="m8 6 2-2" /> <path d="m18 16 2-2" /> <path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17" /> <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /> </svg>
           <h3 class="step-title"><span class="step-num">2</span>つくる</h3>
-          <p>AIに話しかけながら、物語や絵、ゲームなどの作品に仕上げます。説明は短めにして、手を動かす時間を長くとります。</p>
+          <p>AIに話しかけながら、作品に仕上げます。説明は短めにして、手を動かす時間を長くとります。困ったら講師がそばで手伝います。</p>
         </li>
         <li class="point">
           <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /> </svg>
@@ -243,31 +246,22 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
       </ol>
       <div class="rule">
         <h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg>使い方のルールも学ぶ</h3>
-        <p>個人情報を入れない、AIの答えをうのみにしないなど、安心して使うための約束もいっしょに覚えます。</p>
+        <p>はじめに、AIのしくみを身近な例で見てから、個人情報を入れない、AIの答えをうのみにしない、といった約束をいっしょに確認します。</p>
       </div>
     </section>
 
     <section id="makes">
       <h2>つくれるもの</h2>
-      <p class="sec-lead">年齢や興味に合わせてテーマを決めます。</p>
-      <div class="makes">
-        <div class="make"><h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /> </svg>オリジナル絵本</h3><p>お話を考えて、AIと一緒に挿し絵をつくります。</p></div>
-        <div class="make"><h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M8 14s1.5 2 4 2 4-2 4-2" /> <line x1="9" x2="9.01" y1="9" y2="9" /> <line x1="15" x2="15.01" y1="9" y2="9" /> </svg>キャラクターづくり</h3><p>名前や性格を決めて、自分だけのキャラクターを生み出します。</p></div>
-        <div class="make"><h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <line x1="6" x2="10" y1="11" y2="11" /> <line x1="8" x2="8" y1="9" y2="13" /> <line x1="15" x2="15.01" y1="12" y2="12" /> <line x1="18" x2="18.01" y1="10" y2="10" /> <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /> </svg>かんたんなゲーム</h3><p>クイズや迷路など、遊べる作品をAIに手伝ってもらって完成させます。</p></div>
-        <div class="make"><h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" /> <path d="M8.5 2h7" /> <path d="M7 16h10" /> </svg>自由研究</h3><p>調べ方やまとめ方をAIと相談しながら進めます。</p></div>
-      </div>
-      <p class="note">ほかにも「こんなことをやってみたい」というご相談を歓迎します。</p>
+      <p class="sec-lead">第1回の内容はこれから決めます。いま考えている例です。年齢や興味に合わせて、一人ずつテーマを決めます。</p>
+      <dl class="makes">
+        <dt>小学校の低学年</dt>
+        <dd>お話を考えて、AIに挿し絵をかいてもらい、絵本にします。文字を打つのがむずかしいときは、講師や保護者の方が手伝います。</dd>
+        <dt>小学校の高学年・中学生</dt>
+        <dd>クイズや診断などのかんたんなゲーム、自分で考えたキャラクター、調べたことのまとめなど。ことばでAIに頼む練習も、ここでします。</dd>
+      </dl>
+      <p class="note">「これをつくってみたい」があれば、<a href="#contact">メール</a>で教えてください。</p>
     </section>
 
-    <section id="flow">
-      <h2>1回の流れ</h2>
-      <p class="sec-lead">進め方の一例です。人数や内容に合わせて調整します。</p>
-      <ol class="flow">
-        <li><div><svg class="ic ic-lg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /> </svg><h3>AIってなに？</h3><p>身近な例でAIのしくみと、使うときの約束を確認します。</p></div></li>
-        <li><div><svg class="ic ic-lg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" /> </svg><h3>つくる</h3><p>テーマを決めて、AIに話しかけながら作品をつくります。困ったら講師がそばでサポートします。</p></div></li>
-        <li><div><svg class="ic ic-lg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M2 3h20" /> <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /> <path d="m7 21 5-5 5 5" /> </svg><h3>発表する</h3><p>できた作品をみんなに紹介します。親御さんにも見ていただきます。</p></div></li>
-      </ol>
-    </section>
 
     <section id="teacher">
       <h2>講師</h2>
@@ -277,7 +271,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
           <h3>永井 悠資</h3>
           <p class="role">晴海在住｜中央区立晴海地域交流センター はるみらい 育成サポーター</p>
           <div class="bio">
-            <p>仕事でAIの使い方を教えています。AIは、こどもたちが頭の中にある「作ってみたい」を形にできる、とても楽しい道具だと感じています。使い方を正しく理解し、AIの答えを自分でたしかめる力も、一緒に身につけてほしいと考えています。</p>
+            <p>ふだんは、会社でAIツールの使い方を教える仕事をしています。AIを使うと、頭の中にある「作ってみたい」をその場で形にできます。その楽しさと、AIの答えを自分でたしかめる習慣を、こどもたちに伝えたいと思っています。</p>
           </div>
           <h4 class="career-title">これまでの活動</h4>
           <dl class="career">
