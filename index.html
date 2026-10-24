@@ -50,7 +50,7 @@
   --sea:#7fb6ea;--sea-soft:#1c3348;--sun:#f5c45a;--sun-soft:#3a2f14;color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;padding-inline:16px;}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;padding-inline:16px;word-break:auto-phrase;text-wrap:pretty;line-break:strict;}
 .wrap{max-width:960px;margin-inline:auto}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.35;margin:0}
 p{margin:0}
@@ -246,7 +246,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
       </ol>
       <div class="rule">
         <h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg>使い方のルールも学ぶ</h3>
-        <p>はじめに、AIのしくみを身近な例で見てから、個人情報を入れない、AIの答えをうのみにしない、といった約束をいっしょに確認します。</p>
+        <p>はじめに、AIのしくみを身近な例で見てから、個人情報を入れない、AIの答えをうのみにしない、と&#8288;いった約束をいっしょに確認します。</p>
       </div>
     </section>
 
@@ -302,7 +302,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
 
     <section class="register" id="register">
       <h2>事前登録</h2>
-      <p class="sec-lead">メールアドレスだけで登録できます。日時と申込みの案内を、実施が決定した際にお送りいたします。登録しても、参加が決まるわけではありません。</p>
+      <p class="sec-lead">メールアドレスだけで登録できます。日時と申込みの案内を、実施が決定した&#8288;際にお送りいたします。登録しても、参加が決まるわけではありません。</p>
       <form class="form" id="regForm" novalidate>
         <div class="field">
           <label for="f-mail">メールアドレス<span class="req">必須</span></label>
