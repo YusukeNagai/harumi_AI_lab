@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="晴海で開く、小学1年生〜中学生と保護者様のためのAI教室。講師は永井悠資。">
+<meta property="og:title" content="はるみAIラボ">
+<meta property="og:description" content="晴海で開く、小学1年生〜中学生と保護者様のためのAI教室。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yusukenagai.github.io/harumi_AI_lab/">
+<meta property="og:site_name" content="はるみAIラボ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://yusukenagai.github.io/harumi_AI_lab/img/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="はるみAIラボ　晴海で開く、こどものためのAI教室">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<style>body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>はるみAIラボ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 港の朝。白い紙面に、海の青と日差しの黄。ヒーローは大きな見出しと講師の写真、以下は罫線で区切る一段組の読み物。装飾は罫線だけ。 */
+:root{
+  --bg:#f6f9fb;
+  --paper:#ffffff;
+  --ink:#14263a;
+  --muted:#556a7e;
+  --line:#d9e3ec;
+  --sea:#1f5f99;
+  --sea-soft:#e3eef8;
+  --sun:#f2b632;
+  --sun-soft:#fff3d4;
+  --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1a25;--paper:#162433;--ink:#e8eef4;--muted:#9fb1c3;--line:#2a3b4d;
+    --sea:#7fb6ea;--sea-soft:#1c3348;--sun:#f5c45a;--sun-soft:#3a2f14;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1a25;--paper:#162433;--ink:#e8eef4;--muted:#9fb1c3;--line:#2a3b4d;
+  --sea:#7fb6ea;--sea-soft:#1c3348;--sun:#f5c45a;--sun-soft:#3a2f14;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;padding-inline:16px;word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty;line-break:strict;}
+.wrap{max-width:960px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.35;margin:0}
+p{margin:0}
+a{color:var(--sea)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:4px}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:20px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.logo-mark{width:52px;height:52px;flex:none}
+.logo-text{display:flex;flex-direction:column;gap:2px}
+.logo-name{font-family:var(--display);font-weight:900;font-size:1.45rem;letter-spacing:.02em;line-height:1.1}
+.logo-name .ai{color:var(--sea)}
+.logo-en{font-size:.62rem;font-weight:700;letter-spacing:.32em;color:var(--muted)}
+.foot-logo{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.foot-logo .logo-mark{width:32px;height:32px}
+.foot-logo .logo-name{font-size:1rem}
+.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.9rem}
+.top nav a{color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--sea)}
+
+/* hero */
+.hero{padding-block:28px 56px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;color:var(--sea);font-weight:700}
+.hero h1{font-size:clamp(1.75rem,8.4vw,4.4rem);text-wrap:wrap;line-height:1.25;font-weight:900;margin-top:10px;max-width:16em}
+.hero h1 .nb{display:inline-block;white-space:nowrap}
+.hero .lead{margin-top:18px;color:var(--muted);max-width:34em}
+.facts{margin-top:18px;font-size:.92rem;color:var(--ink);font-weight:500}
+.facts span + span::before{content:"／";color:var(--line);margin-inline:.6em}
+.hero-photo{margin:36px 0 0;max-width:100%}
+.hero-photo img{display:block;width:100%;height:auto;aspect-ratio:16/8;object-fit:cover;object-position:center 32%;border-radius:2px}
+.hero-photo figcaption{margin-top:8px;font-size:.82rem;color:var(--muted)}
+
+/* sections */
+section{padding-block:64px;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.85rem,4.6vw,2.6rem);font-weight:900;line-height:1.3}
+.sec-lead{margin-top:14px;font-size:1.05rem;color:var(--muted);max-width:38em}
+
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.point{min-width:0}
+.steps{list-style:none;padding:0;margin-inline:0;margin-bottom:0}
+.point{border-top:2px solid var(--ink);padding-top:12px}
+.rule{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);max-width:44em}
+.rule h3{font-size:1.3rem;font-weight:700}
+.rule p{margin-top:4px;color:var(--muted);font-size:.95rem}
+.steps{gap:20px}
+.steps .point{border-top:2px solid var(--ink);padding-top:12px}
+.ic{display:block;color:var(--sea);flex:none}
+.ic-xl{width:56px;height:56px;margin-bottom:14px}
+.ic-lg{width:88px;height:88px;margin-bottom:16px}
+.ic-md{width:56px;height:56px}
+.ic-row{display:flex;align-items:center;gap:16px}
+.ic-row .ic{margin-bottom:0}
+.step-title{display:flex;align-items:baseline;gap:12px}
+.step-num{font-family:var(--display);font-size:2.6rem;font-weight:900;line-height:1;color:var(--sea);font-variant-numeric:tabular-nums}
+.point h3{font-size:1.4rem;font-weight:700}
+.point p{margin-top:6px;color:var(--muted);font-size:.95rem}
+
+.makes{display:grid;grid-template-columns:14em 1fr;margin:22px 0 0;max-width:46em}
+.makes dt,.makes dd{border-bottom:1px solid var(--line);padding-block:14px;margin:0;min-width:0}
+.makes dt{font-size:1.15rem;font-weight:700;color:var(--sea)}
+.makes dd{color:var(--muted);font-size:.95rem}
+.note{margin-top:14px;font-size:.82rem;color:var(--muted)}
+.steps-lead{margin-top:28px;font-weight:700}
+.steps-lead + .points{margin-top:14px}
+
+/* profile */
+.profile{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;margin-top:26px}
+.profile > *{min-width:0}
+.photo{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:2px;background:var(--sea-soft)}
+.profile h3{font-size:1.9rem;font-weight:900}
+.profile .role{font-size:.85rem;color:var(--muted);margin-top:2px}
+.profile .bio{margin-top:14px;display:grid;gap:12px;max-width:36em}
+.career-title{font-family:var(--display);font-size:1.3rem;font-weight:700;margin:28px 0 0;padding-bottom:8px;border-bottom:2px solid var(--ink);max-width:36em}
+.career{margin:0;display:grid;grid-template-columns:minmax(9em,auto) 1fr;column-gap:24px;max-width:36em}
+.career dt,.career dd{margin:0;padding-block:10px;border-bottom:1px solid var(--line);min-width:0}
+.career dt{font-weight:700;color:var(--sea)}
+@media (max-width:520px){.career{grid-template-columns:1fr}.career dt{border-bottom:0;padding-bottom:0}.career dd{padding-top:2px}}
+
+/* info table: はるみらい掲載シートの項目にそろえる */
+.info{margin-top:22px;border-top:2px solid var(--ink)}
+.info dl{margin:0;display:grid;grid-template-columns:9em 1fr}
+.info dt,.info dd{margin:0;padding:14px 0;border-bottom:1px solid var(--line)}
+.info dt{font-weight:700;font-size:.9rem;color:var(--sea)}
+.info dd{min-width:0}
+.info small{display:block;color:var(--muted);font-size:.82rem}
+
+/* contact */
+.contact{padding-block:64px;border-top:1px solid var(--line)}
+.contact p{margin-top:10px;color:var(--muted);max-width:36em}
+.mailrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.mail{font-family:var(--mono);font-size:1.05rem;border:1px solid var(--line);background:var(--paper);padding:10px 14px;border-radius:2px;user-select:all;word-break:break-all;min-width:0}
+.copy{font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--sea);border-radius:2px;padding:10px 16px;background:var(--sea);color:var(--paper);cursor:pointer}
+.copy:hover{filter:brightness(1.08)}
+
+/* 事前登録 */
+.next{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.next-date{font-weight:700;font-size:.95rem;border-left:4px solid var(--sun);padding:2px 0 2px 12px}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:.95rem;border:1px solid var(--sea);border-radius:2px;padding:11px 20px;background:var(--sea);color:var(--paper);text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.6;cursor:default}
+.register{padding-block:64px;border-top:1px solid var(--line)}
+.register .sec-lead{margin-top:10px;color:var(--muted);max-width:36em}
+.form{margin-top:24px;max-width:36em;display:grid;gap:22px}
+.field{display:grid;gap:8px;min-width:0;border:0;padding:0;margin:0}
+.field > label,.field legend{font-weight:700;font-size:.92rem;padding:0}
+.req,.opt{font-size:.72rem;font-weight:700;margin-left:8px;padding:1px 6px;border-radius:2px;vertical-align:1px}
+.req{background:var(--sun-soft);color:var(--ink)}
+.opt{color:var(--muted);border:1px solid var(--line)}
+.form input[type=text],.form input[type=email],.form select,.form textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:10px 12px;width:100%;max-width:100%}
+.form textarea{min-height:5.5em;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--sea);outline:none}
+.choices{display:flex;flex-wrap:wrap;gap:8px 18px}
+.choices label{display:flex;align-items:center;gap:6px;font-size:.95rem}
+.choices input{accent-color:var(--sea);width:1.05em;height:1.05em}
+.privacy{font-size:.82rem;color:var(--muted)}
+.form-msg{font-weight:700;color:var(--sea)}
+.form-msg.err{color:#b3261e}
+.float-reg{position:fixed;z-index:20;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));box-shadow:0 6px 18px rgba(20,38,58,.22)}
+footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+
+@media (max-width:760px){
+  .hero{padding-block:12px 40px}
+  .hero-photo img{aspect-ratio:4/3}
+  .points{grid-template-columns:1fr}
+  .makes{grid-template-columns:1fr}
+  .makes dt{border-bottom:0;padding-bottom:4px}
+  .makes dd{padding-top:0}
+  .profile{grid-template-columns:1fr}
+  .photo{width:180px}
+  .info dl{grid-template-columns:1fr}
+  .info dt{border-bottom:0;padding-bottom:6px}
+  .info dd{padding-top:6px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="はるみAIラボ トップへ">
+      <svg class="logo-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="94" cy="28" r="14" fill="#F28C28"/><rect x="8" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="8" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="26" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="46" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="44" y="64" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="62" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="80" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="80" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="98" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/></svg>
+      <span class="logo-text">
+        <span class="logo-name">はるみ<span class="ai">AI</span>ラボ</span>
+        <span class="logo-en">HARUMI AI LAB</span>
+      </span>
+    </a>
+    <nav aria-label="ページ内リンク">
+      <a href="#about">教室に<wbr>ついて</a>
+      <a href="#teacher">講師</a>
+      <a href="#info">開催に<wbr>ついて</a>
+      <a href="#register">事前登録</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <p class="eyebrow">晴海の<wbr>こども<wbr>たちへ</p>
+      <h1><span class="nb">AIで、</span><span class="nb">「つくってみたい」を</span><span class="nb">かたちに。</span></h1>
+      <p class="lead">ことばで<wbr>伝えると、<wbr>AIが<wbr>一緒に<wbr>考えてくれる。<wbr>思いついた<wbr>物語や<wbr>絵、<wbr>ゲームを、<wbr>その<wbr>日の<wbr>うちに<wbr>作品に<wbr>する<wbr>教室です。<wbr>パソコンや<wbr>AIに<wbr>さわった<wbr>ことがなくても<wbr>大丈夫です。</p>
+      <p class="facts"><span>小学1年生〜中学生、<wbr>保護者様</span><span>経験不要</span><span>親子参加OK</span></p>
+      <div class="next">
+        <p class="next-date">第1回は<wbr>2027年1月ごろ開催予定</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="img/talk-level-sharp.jpg" width="1200" height="882" alt="ステージで、介護の書類作業を楽にするサービスを発表する講師の永井悠資">
+        <figcaption>講師の<wbr>永井。<wbr>介護の<wbr>現場の<wbr>書類作業を<wbr>AIで<wbr>楽に<wbr>する<wbr>サービスを<wbr>発表した<wbr>ときの<wbr>様子</figcaption>
+      </figure>
+    </div>
+
+    <section id="about">
+      <h2>はるみAIラボって<wbr>どんな<wbr>ところ？</h2>
+      <p class="sec-lead">何を<wbr>つくるかは、<wbr>こども<wbr>自身が<wbr>決めます。<wbr>AIには、<wbr>アイデアを<wbr>広げたり、<wbr>形に<wbr>したりする<wbr>手伝いを<wbr>して<wbr>もらいます。</p>
+      <p class="steps-lead" id="flow">1回は、<wbr>この<wbr>順に<wbr>進めます<wbr>（60分〜。<wbr>人数や<wbr>内容に<wbr>合わせて<wbr>調整します）。</p>
+      <ol class="points steps" aria-label="考える、つくる、届けるの順に進みます">
+        <li class="point">
+          <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /> </svg>
+          <h3 class="step-title"><span class="step-num">1</span>考える</h3>
+          <p>何を<wbr>つくりたいかを、<wbr>まず<wbr>自分で<wbr>決めます。<wbr>AIに<wbr>聞く<wbr>前に、<wbr>自分の<wbr>アイデアを<wbr>ことばに<wbr>してみます。</p>
+        </li>
+        <li class="point">
+          <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13" /> <path d="m8 6 2-2" /> <path d="m18 16 2-2" /> <path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17" /> <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /> </svg>
+          <h3 class="step-title"><span class="step-num">2</span>つくる</h3>
+          <p>AIに<wbr>話しかけながら、<wbr>作品に<wbr>仕上げます。<wbr>説明は<wbr>短めに<wbr>して、<wbr>手を<wbr>動かす<wbr>時間を<wbr>長く<wbr>とります。<wbr>困ったら<wbr>講師が<wbr>そばで<wbr>手伝います。</p>
+        </li>
+        <li class="point">
+          <svg class="ic ic-xl" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /> </svg>
+          <h3 class="step-title"><span class="step-num">3</span>届ける</h3>
+          <p>できた<wbr>作品を、<wbr>参加者や<wbr>保護者の<wbr>方の<wbr>前で<wbr>発表します。<wbr>発表を<wbr>きっかけに、<wbr>親子や<wbr>ご近所の<wbr>人が<wbr>つながる<wbr>場に<wbr>したいと<wbr>考えています。</p>
+        </li>
+      </ol>
+      <div class="rule">
+        <h3 class="ic-row"><svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg>使い方の<wbr>ルールも<wbr>学ぶ</h3>
+        <p>はじめに、<wbr>AIの<wbr>しくみを<wbr>身近な<wbr>例で<wbr>見てから、<wbr>個人情報を<wbr>入れない、<wbr>AIの<wbr>答えを<wbr>うのみにしない、と&#8288;いった<wbr>約束を<wbr>いっしょに<wbr>確認します。</p>
+      </div>
+    </section>
+
+    <section id="makes">
+      <h2>つくれる<wbr>もの</h2>
+      <p class="sec-lead">第1回の<wbr>内容は<wbr>これから<wbr>決めます。<wbr>いま考えている<wbr>例です。<wbr>年齢や<wbr>興味に<wbr>合わせて、<wbr>一<wbr>人ずつテーマを<wbr>決めます。</p>
+      <dl class="makes">
+        <dt>小学校の<wbr>低学年</dt>
+        <dd>おはなしを<wbr>かんが<wbr>えて、<wbr>AIに<wbr>絵を<wbr>かいて<wbr>もらい、<wbr>え<wbr>ほんにします。</dd>
+        <dt>小学校の<wbr>高学年・中学生</dt>
+        <dd>クイズや<wbr>診断などのかんたんな<wbr>ゲーム、<wbr>自分で<wbr>考えた<wbr>キャラクター、<wbr>調べた<wbr>ことの<wbr>まとめなど。<wbr>ことばで<wbr>AIに<wbr>頼む<wbr>練習も、<wbr>ここでします。</dd>
+      </dl>
+      <p class="note">「これを<wbr>つくってみたい」が<wbr>あれば、<a href="#contact">メール</a>で<wbr>教えてください。</p>
+    </section>
+
+
+    <section id="teacher">
+      <h2>講師</h2>
+      <div class="profile">
+        <img class="photo" src="img/portrait.jpg" width="640" height="800" alt="講師の永井悠資">
+        <div>
+          <h3>永井 悠資</h3>
+          <p class="role">晴海在住｜中央区立晴海地域交流センター はるみらい<wbr> 育成サポーター</p>
+          <div class="bio">
+            <p>ふだんは、<wbr>会社で<wbr>AIツールの<wbr>使い方を<wbr>教える<wbr>仕事を<wbr>しています。<wbr>AIを<wbr>使うと、<wbr>頭の<wbr>中に<wbr>ある<wbr>「作ってみたい」を<wbr>その<wbr>場で<wbr>形に<wbr>できます。<wbr>その<wbr>楽しさと、<wbr>AIの<wbr>答えを<wbr>自分で<wbr>たしかめる<wbr>習慣を、<wbr>こども<wbr>たちに<wbr>伝えたいと<wbr>思っています。</p>
+          </div>
+          <h4 class="career-title">これまでの<wbr>活動</h4>
+          <dl class="career">
+            <dt>東京大学</dt><dd>睡眠の<wbr>深さと<wbr>皮膚の<wbr>研究</dd>
+            <dt>家庭教師</dt><dd>6年間、<wbr>生徒一人ひとりに<wbr>合わせた<wbr>個別指導</dd>
+            <dt>ITコンサルタント</dt><dd>企業の<wbr>IT導入支援、<wbr>AIツール活用の<wbr>研修講師</dd>
+            <dt>AIサービス開発</dt><dd>介護の<wbr>現場の<wbr>書類作業を<wbr>楽に<wbr>する<wbr>AIサービスを<wbr>開発・発表</dd>
+            <dt>はるみらい<wbr> 育成サポーター</dt><dd>2025年に<wbr>晴海へ<wbr>引っ越してきた<wbr>ことを<wbr>きっかけに、<wbr>中央区立晴海地域交流センターの<wbr>サポーターに<wbr>登録</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="info">
+      <h2>開催に<wbr>ついて</h2>
+      <p class="sec-lead">第1回は<wbr>2027年1月ごろの<wbr>開催を<wbr>予定しています。<wbr>日時と<wbr>内容は、<a href="#register">事前登録</a>いただいた方に<wbr>先に<wbr>お知らせします。</p>
+      <div class="info">
+        <dl>
+          <dt>時期</dt><dd>2027年1月ごろ<wbr>（予定）<small>日時は<wbr>決まりしだい<wbr>お知らせします</small></dd>
+          <dt>対象</dt><dd>小学1年生〜中学生、<wbr>保護者様<small>小学1・<wbr>2年生は、<wbr>保護者の<wbr>方と<wbr>いっしょに<wbr>参加してください</small></dd>
+          <dt>レベル</dt><dd>初心者<wbr>（経験不要）</dd>
+          <dt>時間</dt><dd>60分〜</dd>
+          <dt>定員</dt><dd>親子3組まで<small>初回は、<wbr>一<wbr>人ずつ<wbr>見られるように<wbr>少人数で<wbr>開きます</small></dd>
+          <dt>場所</dt><dd>はるみらい<wbr>館内など、<wbr>ご相談の<wbr>うえ決定</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="register" id="register">
+      <h2>事前登録</h2>
+      <p class="sec-lead">メールアドレスだけで<wbr>登録できます。<wbr>日時と<wbr>申込みの<wbr>案内を、<wbr>実施が<wbr>決定した&#8288;際に<wbr>お送りいたします。<wbr>登録しても、<wbr>参加が<wbr>決まるわけではありません。</p>
+      <form class="form" id="regForm" novalidate>
+        <div class="field">
+          <label for="f-mail">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="f-mail" name="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="field">
+          <label for="f-grade">お子さまの<wbr>学年<span class="opt">任意</span></label>
+          <select id="f-grade" name="grade"><option value="">選んでください</option><option>小学1年生</option><option>小学2年生</option><option>小学3年生</option><option>小学4年生</option><option>小学5年生</option><option>小学6年生</option><option>中学1年生</option><option>中学2年生</option><option>中学3年生</option><option>その他</option></select>
+        </div>
+        <p class="privacy">いただいた<wbr>情報は、<wbr>はるみAIラボの<wbr>開催の<wbr>ご案内にだけ<wbr>使います。</p>
+        <div><button class="btn" type="submit" id="regBtn">登録する</button></div>
+        <p class="form-msg" id="regMsg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>お問い合わせ</h2>
+      <p>教室の<wbr>ご依頼、<wbr>内容の<wbr>ご相談は<wbr>メールで<wbr>お気軽に<wbr>どうぞ。</p>
+      <div class="mailrow">
+        <svg class="ic ic-md" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" > <rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /> </svg>
+        <span class="mail" id="mail">yusuke.nagai.123@gmail.com</span>
+        <button class="copy" id="copyBtn" type="button">アドレスを<wbr>コピー</button>
+      </div>
+    </section>
+  </main>
+
+  <a class="btn float-reg" id="floatReg" href="#register">事前登録する</a>
+
+  <footer>
+    <div class="foot-logo">
+      <svg class="logo-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="94" cy="28" r="14" fill="#F28C28"/><rect x="8" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="8" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="26" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="46" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="44" y="64" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="62" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="80" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="80" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="98" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/></svg>
+      <span class="logo-name">はるみ<span class="ai">AI</span>ラボ</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// 事前登録：送信先（Googleフォーム）の設定。未設定のあいだは送信しない
+var REG={
+  action:'https://docs.google.com/forms/d/e/1FAIpQLSeoLGmQXmZ7nhmpm6qvGptsT_ZLyCIXt_XNO5dv0deGoaNOZQ/formResponse',
+  entry:{email:'entry.1950214080',grade:'entry.883024398'}
+};
+(function(){
+  var f=document.getElementById('regForm'), msg=document.getElementById('regMsg'), btn=document.getElementById('regBtn');
+  function say(t,err){msg.textContent=t;msg.className='form-msg'+(err?' err':'');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim(), grade=f.grade.value;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say('メールアドレスを入力してください。',true);return;}
+    if(!REG.action){say('（ドラフトのため、まだ送信されません）');return;}
+    var d=new URLSearchParams();
+    d.append(REG.entry.email,email);if(grade)d.append(REG.entry.grade,grade);
+    btn.disabled=true;say('送信しています…');
+    fetch(REG.action,{method:'POST',mode:'no-cors',body:d}).then(function(){
+      f.reset();say('登録しました。日時が決まりしだい、メールでご案内します。');
+    }).catch(function(){
+      say('送信できませんでした。時間をおいて試すか、下のメールアドレスにご連絡ください。',true);
+    }).finally(function(){btn.disabled=false;});
+  });
+})();
+
+// コピー
+(function(){
+  var btn=document.getElementById('copyBtn'), mail=document.getElementById('mail');
+  btn.addEventListener('click',function(){
+    var t=mail.textContent.trim();
+    function selectIt(){var r=document.createRange();r.selectNodeContents(mail);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='選択しました';}
+    try{
+      navigator.clipboard.writeText(t).then(function(){btn.textContent='コピーしました';},selectIt);
+    }catch(e){selectIt();}
+    setTimeout(function(){btn.textContent='アドレスをコピー';},2200);
+  });
+})();
+
+</script>
+
+</body>
+</html>
