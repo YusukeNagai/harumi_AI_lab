@@ -169,6 +169,18 @@ section h2{font-size:clamp(1.85rem,4.6vw,2.6rem);font-weight:900;line-height:1.3
 .privacy{font-size:.82rem;color:var(--muted)}
 .form-msg{font-weight:700;color:var(--sea)}
 .form-msg.err{color:#b3261e}
+.line-row{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.btn-line{font-size:1.05rem;padding:14px 28px}
+.mail-reg{margin-top:32px;max-width:36em;font-size:.9rem}
+.mail-reg summary strong{color:var(--ink)}
+.mail-reg summary{cursor:pointer;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.mail-reg .form{margin-top:16px}
+.fish{display:block;height:auto}
+.mascot{display:block;width:120px;height:auto;margin-bottom:14px}
+.mascot-sm{width:84px;margin-bottom:0}
+.fish-ok{width:48px;margin-bottom:8px}
+.fish-school{display:flex;gap:10px;align-items:center;margin-top:14px}
+.fish-school img:nth-child(2){margin-top:14px}
 .float-reg{position:fixed;z-index:20;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));box-shadow:0 6px 18px rgba(20,38,58,.22)}
 footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
 
@@ -210,6 +222,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
 
   <main id="top">
     <div class="hero">
+      <img class="mascot" src="img/fish-main.svg" alt="" width="120" height="80">
       <p class="eyebrow">晴海の<wbr>こども<wbr>たちへ</p>
       <h1><span class="nb">AIで、</span><span class="nb">「つくってみたい」を</span><span class="nb">かたちに。</span></h1>
       <p class="lead">ことばで<wbr>伝えると、<wbr>AIが<wbr>一緒に<wbr>考えてくれる。<wbr>思いついた<wbr>物語や<wbr>絵、<wbr>ゲームを、<wbr>その<wbr>日の<wbr>うちに<wbr>作品に<wbr>する<wbr>教室です。<wbr>パソコンや<wbr>AIに<wbr>さわった<wbr>ことがなくても<wbr>大丈夫です。</p>
@@ -302,20 +315,24 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
 
     <section class="register" id="register">
       <h2>事前登録</h2>
-      <p class="sec-lead">メールアドレスだけで<wbr>登録できます。<wbr>日時と<wbr>申込みの<wbr>案内を、<wbr>実施が<wbr>決定した&#8288;際に<wbr>お送りいたします。<wbr>登録しても、<wbr>参加が<wbr>決まるわけではありません。</p>
-      <form class="form" id="regForm" novalidate>
-        <div class="field">
-          <label for="f-mail">メールアドレス<span class="req">必須</span></label>
-          <input type="email" id="f-mail" name="email" autocomplete="email" inputmode="email" required>
-        </div>
-        <div class="field">
-          <label for="f-grade">お子さまの<wbr>学年<span class="opt">任意</span></label>
-          <select id="f-grade" name="grade"><option value="">選んでください</option><option>小学1年生</option><option>小学2年生</option><option>小学3年生</option><option>小学4年生</option><option>小学5年生</option><option>小学6年生</option><option>中学1年生</option><option>中学2年生</option><option>中学3年生</option><option>その他</option></select>
-        </div>
-        <p class="privacy">いただいた<wbr>情報は、<wbr>はるみAIラボの<wbr>開催の<wbr>ご案内にだけ<wbr>使います。</p>
-        <div><button class="btn" type="submit" id="regBtn">登録する</button></div>
-        <p class="form-msg" id="regMsg" role="status" aria-live="polite"></p>
-      </form>
+      <p class="sec-lead">LINEで<wbr>「はるみAIラボ」を<wbr>友だち追加すると、<wbr>日時と<wbr>申込みの<wbr>案内を<wbr>先に<wbr>お送りします。<wbr>登録しても、<wbr>参加が<wbr>決まるわけではありません。</p>
+      <p class="sec-lead">友だち追加の<wbr>あと、<wbr>LINEで<wbr>お子さまの<wbr>学年を<wbr>おたずねします。<wbr>学年に<wbr>合わせて<wbr>内容と<wbr>教え方を<wbr>準備する<wbr>ためです。</p>
+      <div class="line-row">
+        <a class="btn btn-line" href="https://lin.ee/6Rreqpr" target="_blank" rel="noopener">LINEで<wbr>友だち追加</a>
+        <img class="mascot mascot-sm" src="img/fish-main.svg" alt="" width="84" height="56">
+      </div>
+      <details class="mail-reg">
+        <summary>LINEでの<wbr>登録が<wbr>難しい<wbr>場合は、<wbr><strong>メールでも<wbr>登録できます</strong></summary>
+        <form class="form" id="regForm" novalidate>
+          <div class="field">
+            <label for="f-mail">メールアドレス<span class="req">必須</span></label>
+            <input type="email" id="f-mail" name="email" autocomplete="email" inputmode="email" required>
+          </div>
+          <p class="privacy">いただいた<wbr>情報は、<wbr>はるみAIラボの<wbr>開催の<wbr>ご案内にだけ<wbr>使います。</p>
+          <div><button class="btn" type="submit" id="regBtn">メールで<wbr>登録する</button></div>
+          <p class="form-msg" id="regMsg" role="status" aria-live="polite"></p>
+        </form>
+      </details>
     </section>
 
     <section class="contact" id="contact">
@@ -336,6 +353,7 @@ footer{padding-block:24px 96px;font-size:.8rem;color:var(--muted);border-top:1px
       <svg class="logo-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="94" cy="28" r="14" fill="#F28C28"/><rect x="8" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="8" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="26" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="26" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="46" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="44" y="64" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="44" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="62" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="62" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="80" y="82" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="80" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="64" width="14" height="14" rx="3" fill="#5BB6E8"/><rect x="98" y="82" width="14" height="14" rx="3" fill="#1D6FB8"/><rect x="98" y="100" width="14" height="14" rx="3" fill="#1D6FB8"/></svg>
       <span class="logo-name">はるみ<span class="ai">AI</span>ラボ</span>
     </div>
+    <div class="fish-school" aria-hidden="true"><img src="img/fish-iwashi.svg" alt="" width="44" height="18"><img src="img/fish-iwashi.svg" alt="" width="36" height="15"><img src="img/fish-iwashi.svg" alt="" width="44" height="18"></div>
   </footer>
 </div>
 
@@ -350,14 +368,14 @@ var REG={
   function say(t,err){msg.textContent=t;msg.className='form-msg'+(err?' err':'');}
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var email=f.email.value.trim(), grade=f.grade.value;
+    var email=f.email.value.trim(), grade=f.grade?f.grade.value:'';
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){say('メールアドレスを入力してください。',true);return;}
     if(!REG.action){say('（ドラフトのため、まだ送信されません）');return;}
     var d=new URLSearchParams();
     d.append(REG.entry.email,email);if(grade)d.append(REG.entry.grade,grade);
     btn.disabled=true;say('送信しています…');
     fetch(REG.action,{method:'POST',mode:'no-cors',body:d}).then(function(){
-      f.reset();say('登録しました。日時が決まりしだい、メールでご案内します。');
+      f.reset();say('登録しました。日時が決まりしだい、メールでご案内します。');msg.insertAdjacentHTML('afterbegin','<img class="fish fish-ok" src="img/fish-manbo.svg" alt="" width="48" height="48">');
     }).catch(function(){
       say('送信できませんでした。時間をおいて試すか、下のメールアドレスにご連絡ください。',true);
     }).finally(function(){btn.disabled=false;});
